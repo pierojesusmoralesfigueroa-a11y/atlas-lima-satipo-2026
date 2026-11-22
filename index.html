@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas geográfico y fotográfico · Lima–Satipo 2026</title>
+<meta name="description" content="Atlas académico interactivo del transecto Lima–Satipo 2026: 243 fotografías GPS, ruta vial, pisos ecológicos, ecorregiones y perfil de elevación.">
+<meta name="theme-color" content="#203b56">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Atlas geográfico y fotográfico · Lima–Satipo 2026">
+<meta property="og:description" content="Explora 243 fotografías georreferenciadas, el paisaje y el perfil altitudinal del transecto Lima–Satipo.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<style>
+:root{--navy:#233f5b;--ink:#243749;--muted:#718190;--line:#e4e9ed;--pale:#f5f7f9;--copper:#c97838}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--pale)}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #6fbad1;outline-offset:2px}
+header{height:73px;background:var(--navy);color:white;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;gap:12px;align-items:center;min-width:0}.brandmark{border:1px solid #7997af;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:23px;flex:none}.brand strong{font-size:19px;letter-spacing:.15px;display:block}.brand small{display:block;color:#c8d7e2;font-size:12px;margin-top:2px}.headstat{font-size:12px;color:#dae6ef;text-align:right}.headstat b{font-size:18px;color:white;display:block}#menu{display:none;background:#365b78;color:white;border:1px solid #718aa0;border-radius:7px;padding:7px 10px}
+.shell{height:calc(100dvh - 73px);display:flex;position:relative;overflow:hidden}#sidebar{width:340px;flex:0 0 340px;background:white;display:flex;flex-direction:column;border-right:1px solid var(--line);z-index:750;box-shadow:0 2px 9px #122a3810}.sidebar_top{padding:13px 15px 10px;display:flex;flex-direction:column;gap:9px;border-bottom:1px solid var(--line)}.labeltop{font-size:10px;font-weight:750;letter-spacing:1.4px;color:#7c8894;text-transform:uppercase}.meta{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;color:#6d7c88}.counter{font-weight:750;color:#2e536e;font-size:13px}.pill{border-radius:20px;background:#f0f5f8;color:#557082;padding:4px 8px;font-size:11px}.inputwrap{position:relative}.inputwrap span{position:absolute;left:11px;top:10px;color:#8a98a2}.inputwrap input{padding:10px 11px 10px 33px}
+input[type=search],select{width:100%;background:white;color:var(--ink);border:1px solid #d3dde3;border-radius:7px;padding:9px 10px;font-size:12px;min-width:0}input[type=search]{height:38px}.selectrow{display:flex;gap:7px}.selectrow select{flex:1;max-width:calc(50% - 4px)}.tabs{display:flex;background:#f2f5f7;border-radius:8px;padding:3px;gap:4px}.tab{flex:1;background:transparent;color:#5b6e7d;border:0;padding:7px 3px;font-size:12px;border-radius:6px;font-weight:650}.tab.active{background:white;color:#274d69;box-shadow:0 1px 3px #00000014}.layers{padding:11px 15px;border-bottom:1px solid var(--line);display:grid;gap:8px}.layers_header{display:flex;justify-content:space-between;align-items:center}.layergrid{display:grid;grid-template-columns:1fr 1fr;gap:7px 6px}.layergrid label{display:flex;gap:7px;align-items:center;font-size:12px;white-space:nowrap;cursor:pointer}.layergrid input{accent-color:#2a6885}.swatch{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}.footnote{color:#748391;font-size:10.5px;line-height:1.45}.resultheader{padding:10px 15px 6px;display:flex;justify-content:space-between;align-items:center;font-size:12px}.resultheader b{font-size:12px}.resultheader button{border:0;background:none;color:#3c738f;font-size:11px;padding:3px}.list{padding:0 9px 14px;overflow:auto;flex:1}.item{border:1px solid transparent;display:flex;gap:9px;width:100%;border-radius:9px;padding:7px;background:white;color:inherit;text-align:left;align-items:center;cursor:pointer}.item:hover,.item:focus-visible{background:#f0f7fa;border-color:#bed5df}.item img{width:76px;height:58px;object-fit:cover;border-radius:6px;background:#ebeff1;flex:none}.iteminfo{min-width:0}.item strong{font-size:12px;display:block;margin-bottom:4px}.item small{display:block;color:#6e8290;font-size:11px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width:205px}.tag{display:inline-block;background:#fff1e9;color:#9d4c27;border-radius:4px;padding:2px 5px;font-size:10px;font-weight:700;margin-top:4px}.tag.back{background:#f7f1dc;color:#806d30}.empty{padding:25px 12px;text-align:center;font-size:12px;color:#788896;line-height:1.5}.sidebarbottom{padding:8px 15px;background:#f8fafb;border-top:1px solid var(--line);font-size:10px;line-height:1.45;color:#6d7984}
+#map{height:100%;flex:1;min-width:0;background:#e3ebeb}.leaflet-container{font-family:inherit}.leaflet-control-layers{border:1px solid #dce5e7!important;box-shadow:0 3px 15px #16324a18!important;border-radius:9px!important;font-size:12px}.leaflet-control-layers label{font-size:12px}.leaflet-popup-content{width:290px!important;margin:12px 14px}.photo-card img{width:100%;max-height:225px;object-fit:contain;background:#f1f3f4;border-radius:7px}.photo-card h3{font-size:15px;color:#25455e;margin:9px 0 6px}.photo-card p{font-size:12px;line-height:1.45;margin:4px 0;color:#344c5e}.photo-card .open{display:block;text-align:center;background:#264c6b;color:white!important;padding:9px;border-radius:6px;margin-top:9px;font-weight:700;text-decoration:none;font-size:12px}.photo-card .note{background:#eef4f5;padding:6px;border-radius:6px;color:#536f7a;font-size:10px;margin-top:7px}.photo-card .warn{background:#fff5ea;color:#805420}.photo-card .minitag{font-size:10px;letter-spacing:.5px;color:#b65f30;font-weight:750}.regionpopup{font-size:13px;line-height:1.45}.regionpopup strong{font-size:14px;color:#284960}.regionpopup small{display:block;margin-top:5px;color:#768797;font-size:11px}
+.dotwrap{background:none;border:0;display:flex;align-items:center;justify-content:center}.dot{display:block;border:2px solid white;background:#317f99;border-radius:50%;width:12px;height:12px;box-shadow:0 0 0 1px #32515f,0 1px 4px #1238}.dot.fund{width:17px;height:17px;background:#d76a40;box-shadow:0 0 0 1px #8b4c2b,0 1px 5px #1238}.dot.respaldo{width:14px;height:14px;background:#e8b450}.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#244c6d!important;color:white!important;font-weight:750}.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:#b8d5dfaf!important}
+.maptools{position:absolute;z-index:500;top:15px;left:15px;display:flex;gap:7px}.toolbtn{border:1px solid #dfe7ea;background:#ffffffed;box-shadow:0 2px 6px #243d4517;border-radius:7px;font-size:12px;font-weight:650;padding:9px 11px;color:#365367}.legend{position:absolute;z-index:500;bottom:195px;right:15px;border:1px solid #dce6e9;border-radius:11px;background:#fffffff2;box-shadow:0 3px 13px #26404d21;padding:9px 12px;width:210px;max-height:40vh;overflow:auto}.legend b{font-size:11px;display:block;margin-bottom:7px;color:#31546b}.legend .legendrow{display:flex;gap:9px;align-items:center;font-size:10.5px;color:#455b69;margin:5px 0;line-height:1.25}.legend span.chip{width:25px;height:12px;flex:none;border:1px solid #ffffff80}.legend span.linechip{height:5px;border:0}.legend small{display:block;color:#798a95;font-size:9px;line-height:1.4;margin-top:6px}.legend.hidden{display:none}
+.profile{position:absolute;left:15px;bottom:15px;right:15px;z-index:510;max-height:165px;background:#fffffff3;box-shadow:0 3px 17px #182e3f24;border:1px solid #dbe5e9;border-radius:11px;padding:8px 12px 4px}.profilehead{display:flex;align-items:center;justify-content:space-between;gap:10px}.profilehead strong{font-size:12px;color:#2b526b}.profilehead small{font-size:10px;color:#778693}.profilehead button{padding:4px 8px;font-size:11px;border:1px solid #d9e2e6;background:white;border-radius:6px}.profile svg{width:100%;height:121px;display:block;cursor:crosshair;touch-action:manipulation}.profile.closed{max-height:37px;overflow:hidden}.profile.closed svg{display:none}.profile.closed .profilehead small{display:none}.profile svg text{font:10px Segoe UI,Arial,sans-serif;fill:#64798b}.profile svg .axis{stroke:#aab8c2;stroke-width:1}.profile svg .grid{stroke:#e3e9ec;stroke-width:1}.profile svg .line{fill:none;stroke:#254d70;stroke-width:1.8;stroke-linejoin:round}.profile svg .guide{stroke:#94a3b8;stroke-dasharray:4 4;stroke-width:1}.profile svg .guide.peak{stroke:#d95f47;stroke-width:1.4}.profile svg .focus{stroke:#d76a40;stroke-width:1.4;stroke-dasharray:3 3}.profile svg .clickzone{fill:transparent}.profiletip{position:absolute;right:13px;top:29px;color:#476a81;font-size:10px;pointer-events:none}
+@media(max-width:850px){header{height:65px;padding:8px 12px}.brand strong{font-size:15px}.brand small{font-size:10px}.headstat{display:none}#menu{display:block}.shell{height:calc(100dvh - 65px)}#sidebar{width:300px;flex:0 0 300px}.legend{bottom:155px}.profile{max-height:135px}.profile svg{height:92px}}
+@media(max-width:650px){.shell{display:block}#sidebar{position:absolute;top:0;left:0;width:min(100%,360px);height:100%;box-shadow:4px 0 20px #263f4e38;z-index:900}#sidebar.collapsed{display:none}#map{width:100%;height:100%}.profile{left:8px;right:8px;bottom:8px;padding:7px;max-height:130px}.profile svg{height:89px}.profilehead small{display:none}.legend{right:8px;bottom:154px;max-height:27vh;width:160px;padding:8px}.maptools{top:9px;left:8px}.brandmark{width:32px;height:32px;font-size:18px}.brand{gap:7px}.brand strong{font-size:13px}.brand small{font-size:10px}}
+
+/* Edición pública: diseño, portada y ficha metodológica. */
+header{background:#203b56;border-bottom:3px solid #d4a45a}
+.brandmark{border-color:#8c9ca9;color:#e7bd75}
+.header-actions{display:flex;align-items:center;gap:10px}
+.unmsm-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#cddbe8;line-height:1.45;text-align:right;max-width:180px}
+.header-about{background:#ffffff18;border:1px solid #ffffff57;border-radius:7px;color:#fff;padding:9px 12px;font-size:12px;font-weight:700;white-space:nowrap}
+.header-about:hover{background:#ffffff30}
+.landing{position:fixed;inset:0;z-index:99999;display:flex;justify-content:center;align-items:center;padding:20px;overflow-y:auto;background:#101f30cc;backdrop-filter:blur(8px)}
+.landing.is-hidden{display:none}
+.landing-card{position:relative;isolation:isolate;width:min(1020px,100%);min-height:540px;border-radius:22px;overflow:hidden;background:#203b56;color:white;box-shadow:0 30px 100px #0616278f;display:flex;flex-direction:column;justify-content:space-between;border:1px solid #9caabb70}
+.landing-card::before{content:"";position:absolute;z-index:-2;inset:0;background:url('portada.jpg') center/cover no-repeat}
+.landing-card::after{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(92deg,#142f48f5 0%,#18344bdc 42%,#203b5666 80%),linear-gradient(0deg,#142f49d9,transparent 52%)}
+.landing-top,.landing-bottom{padding:28px 38px;display:flex;align-items:center;gap:14px}
+.landing-top{justify-content:space-between}
+.landing-badge{padding:9px 12px;border:1px solid #e0edf366;border-radius:80px;backdrop-filter:blur(8px);font-size:11px;font-weight:800;letter-spacing:1.4px}
+.landing-edition{color:#d9e4ee;font-size:12px;text-align:right}
+.landing-center{padding:30px 38px 12px;max-width:760px}
+.landing-kicker{color:#f5ce91;text-transform:uppercase;letter-spacing:2.1px;font-weight:750;font-size:12px}
+.landing-center h1{font-size:clamp(36px,5.8vw,67px);line-height:1.06;letter-spacing:-1.7px;margin:12px 0 17px;max-width:700px}
+.landing-center p{font-size:clamp(14px,1.5vw,17px);line-height:1.64;color:#ebf1f6;max-width:630px;margin:0 0 24px}
+.landing-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.landing-primary,.landing-secondary{border:0;border-radius:9px;padding:13px 22px;font-weight:750;font-size:14px}
+.landing-primary{background:#e9bf7d;color:#142b3e;box-shadow:0 5px 18px #111e2933}
+.landing-primary:hover{background:#f6d7a1}
+.landing-secondary{background:#ffffff1c;color:#fff;border:1px solid #ffffff88}
+.landing-secondary:hover{background:#ffffff33}
+.landing-bottom{border-top:1px solid #ffffff44;justify-content:space-between;flex-wrap:wrap;font-size:12px;color:#eff4f9}
+.landing-metric strong{display:block;font-size:22px;color:#fff}
+.landing-disclaimer{color:#c8d4df;font-size:10px;max-width:235px;text-align:right;line-height:1.4}
+.info-dialog{border:0;border-radius:16px;padding:0;background:white;color:#263e51;width:min(715px,calc(100vw - 22px));max-height:min(85vh,820px);box-shadow:0 28px 90px #0b263c7e}
+.info-dialog::backdrop{background:#0c1e2bb8;backdrop-filter:blur(3px)}
+.info-head{display:flex;justify-content:space-between;align-items:start;gap:15px;background:#203b56;color:white;padding:23px 28px}
+.info-head h2{font-size:22px;margin:5px 0 0;line-height:1.2}
+.info-head small{color:#e6be83;letter-spacing:1.5px;text-transform:uppercase}
+.info-close{border:1px solid #ffffff7f;background:#ffffff16;color:white;border-radius:8px;padding:6px 10px;font-size:20px;line-height:1}
+.info-content{padding:25px 28px;overflow-y:auto;max-height:calc(85vh - 90px);font-size:14px;line-height:1.65}
+.info-content h3{font-size:14px;text-transform:uppercase;letter-spacing:.8px;color:#315c75;margin:22px 0 7px}
+.info-content p{margin:5px 0 13px}.info-content li{margin:4px 0}.info-content a{color:#1b6889}
+.info-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:10px 0 22px}
+.info-facts div{background:#f1f5f6;padding:15px;border-radius:9px}.info-facts strong{font-size:23px;display:block;color:#264761}.info-facts small{font-size:11px;color:#6a7e8b}
+.info-highlight{background:#f5f8fa;border-left:3px solid #d5a65e;padding:10px 14px;border-radius:4px}
+.landing:focus-within .landing-card{outline:0}
+@media(max-width:850px){.unmsm-label{display:none}.header-about{padding:7px 9px;font-size:11px}}
+@media(max-width:650px){.brand small{display:none}.brand strong{font-size:12px}.header-about{font-size:11px;padding:7px 8px}.landing{padding:8px}.landing-card{min-height:min(720px,94dvh);border-radius:14px}.landing-top,.landing-bottom{padding:18px}.landing-center{padding:25px 22px}.landing-center h1{letter-spacing:-.6px}.landing-bottom{gap:12px}.landing-disclaimer{max-width:100%;text-align:left}.info-head{padding:20px}.info-content{padding:18px}.info-facts{grid-template-columns:repeat(3,1fr)}.info-facts div{padding:9px}.info-facts strong{font-size:17px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="brandmark" aria-hidden="true">◈</div><div><strong>ATLAS INTERACTIVO · LIMA–SATIPO</strong><small>Salida de campo · Octubre 2026 · Fotografías y geografía del transecto</small></div></div><div class="header-actions"><span class="unmsm-label">UNMSM<br>Proyecto académico estudiantil</span><button id="aboutOpen" class="header-about" type="button">Acerca del atlas</button><button id="menu" aria-label="Mostrar filtros">☰ Filtros</button></div></header>
+<div class="shell">
+<aside id="sidebar">
+ <div class="sidebar_top"><div class="meta"><span class="labeltop">Explorar fotografías</span><span class="pill">243 puntos GPS</span></div>
+ <div class="inputwrap"><span>⌕</span><input type="search" id="search" placeholder="Buscar foto, localidad o km…" aria-label="Buscar fotografías"></div>
+ <div class="selectrow"><select id="pisoFilter" aria-label="Filtrar por piso ecológico"><option value="">Todos los pisos</option></select><select id="ecoFilter" aria-label="Filtrar por ecorregión"><option value="">Todas las ecorregiones</option></select></div>
+ <div class="tabs" role="group" aria-label="Tipo de fotografía"><button class="tab active" data-type="Todas">Todas</button><button class="tab" data-type="Fundamental">11 esenciales</button><button class="tab" data-type="Respaldo">Respaldos</button></div>
+ <div class="meta"><span id="resultcount" class="counter">243 fotografías</span><span>GPS · ubicación original</span></div></div>
+ <div class="layers"><div class="layers_header"><span class="labeltop">Capas del mapa</span><span style="font-size:10px;color:#728694">activar / desactivar</span></div>
+  <div class="layergrid">
+   <label><input type="checkbox" id="layerphotos" checked><span class="swatch" style="background:#d76a40"></span>Fotografías</label>
+   <label><input type="checkbox" id="layerroute" checked><span class="swatch" style="background:#283c50"></span>Ruta vial</label>
+   <label><input type="checkbox" id="layerpisos" checked><span class="swatch" style="background:#77bc7a"></span>Pisos ecológicos</label>
+   <label><input type="checkbox" id="layerecos"><span class="swatch" style="background:#b4a5d1"></span>Ecorregiones</label>
+   <label><input type="checkbox" id="layerhill"><span class="swatch" style="background:#929fa3"></span>Relieve sombreado</label>
+   <label><input type="checkbox" id="layerprofile" checked><span class="swatch" style="background:#254d70"></span>Perfil altitudinal</label>
+  </div><div class="footnote">Los pisos asociados a fotografías se estiman por el <b>tramo vial más próximo</b>. La capa original conserva categorías preliminares y tramos por revisar.</div>
+ </div>
+ <div class="resultheader"><b>Galería georreferenciada</b><button id="clear">Limpiar filtros</button></div>
+ <div class="list" id="gallery" aria-live="polite"></div>
+ <div class="sidebarbottom">Proyecto académico estudiantil · UNMSM · Octubre 2026 · Fotografías autorizadas para publicación. Fuentes, límites y metodología en «Acerca del atlas».</div>
+</aside>
+<div id="map" role="application" aria-label="Mapa interactivo de fotografías y ecorregiones Lima Satipo"></div>
+<div class="maptools"><button class="toolbtn" id="fit">◎ Ver toda la ruta</button><button class="toolbtn" id="legendToggle">▤ Leyenda</button></div>
+<div class="legend" id="legend"></div>
+<div class="profile" id="profile"><div class="profilehead"><div><strong>Perfil altitudinal Lima–Satipo</strong> <small>· Modelo de elevación ANADEM 30 m · clic para explorar</small></div><button id="collapseProfile">Ocultar</button></div><svg id="profileSvg" viewBox="0 0 900 145" preserveAspectRatio="none" aria-label="Gráfico del perfil altitudinal"></svg><span class="profiletip" id="profiletip"></span></div>
+</div>
+<div id="landing" class="landing" role="dialog" aria-modal="true" aria-labelledby="landingTitle">
+ <section class="landing-card">
+  <div class="landing-top"><div class="landing-badge">ATLAS DE CAMPO · 2026</div><div class="landing-edition">Universidad Nacional Mayor de San Marcos<br>Proyecto académico estudiantil</div></div>
+  <div class="landing-center"><div class="landing-kicker">Del litoral a la selva alta</div><h1 id="landingTitle">Lima–Satipo:<br>un territorio, múltiples paisajes</h1><p>Explora el transecto mediante fotografías georreferenciadas, relieve andino, pisos ecológicos, ecorregiones y un perfil altitudinal interactivo. Un registro visual de la salida de campo de octubre de 2026.</p><div class="landing-buttons"><button class="landing-primary" type="button" id="enterAtlas">Explorar el atlas ↗</button><button class="landing-secondary" type="button" id="fromLandingAbout">Conocer el proyecto</button></div></div>
+  <div class="landing-bottom"><div class="landing-metric"><strong>243</strong>fotografías GPS</div><div class="landing-metric"><strong>439,44 km</strong>ruta cartografiada</div><div class="landing-metric"><strong>30 m</strong>resolución del DEM</div><div class="landing-disclaimer">Trabajo académico no oficial de la UNMSM · Registro de campo 2026</div></div>
+ </section>
+</div>
+<dialog id="aboutDialog" class="info-dialog" aria-labelledby="aboutTitle">
+ <div class="info-head"><div><small>Presentación y créditos</small><h2 id="aboutTitle">Acerca del atlas Lima–Satipo</h2></div><button id="aboutClose" class="info-close" type="button" aria-label="Cerrar información">×</button></div>
+ <div class="info-content">
+   <p>Este atlas es un <strong>proyecto académico estudiantil vinculado a una salida de campo de la Universidad Nacional Mayor de San Marcos (UNMSM)</strong>. Su objetivo es documentar la variación del paisaje entre Lima y Satipo mediante fotografías, cartografía temática y análisis de elevación. No constituye un portal oficial ni una publicación institucional de la universidad.</p>
+   <div class="info-facts"><div><strong>243</strong><small>registros GPS</small></div><div><strong>11</strong><small>fotografías esenciales</small></div><div><strong>439,44</strong><small>km de ruta SIG</small></div></div>
+   <h3>Cómo explorar</h3><p>Selecciona las fotos del mapa o de la galería lateral; usa los filtros de piso ecológico, ecorregión y tipo de fotografía. Activa las capas temáticas para comparar patrones territoriales. Haz clic en el perfil de elevación para localizar un punto de la carretera.</p>
+   <h3>Metodología y límites de interpretación</h3>
+   <ul><li>Los puntos representan posiciones GPS asociadas a imágenes tomadas durante la salida de campo de octubre de 2026.</li><li>La ruta cartográfica se obtuvo de una capa vial corregida en SIG; sus 439,44 km no equivalen necesariamente al odómetro del vehículo.</li><li>Los pisos ecológicos de Pulgar Vidal se expresan mediante 13 tramos sobre la ruta. La capa original conserva estados <strong>PRELIMINAR</strong> y <strong>REVISAR</strong>; no deben tomarse como límites ecológicos oficiales.</li><li>El piso asignado a una fotografía procede del tramo vial más cercano, no de una delimitación ecológica exacta del punto.</li><li>Las ecorregiones de Brack Egg son polígonos recortados al corredor; aparecer en el mapa no significa necesariamente que la carretera las atraviese.</li><li>El relieve sombreado y el perfil proceden de un modelo digital de elevación de 30 m; sus altitudes pueden diferir de las registradas por GPS.</li></ul>
+   <h3>Fuentes y herramientas</h3><p>Fotografías y coordenadas: registro GPS de la salida de campo (2026). Ruta vial: capa Lima–Satipo corregida con información cartográfica del MTC–Provías. Pisos ecológicos: clasificación de Javier Pulgar Vidal, representada por los tramos preliminares del proyecto. Ecorregiones: clasificación de Antonio Brack Egg y capa del MINAM suministrada para el proyecto. Elevación: DEM ANADEM Lima–Junín de 30 m. Visualización: Leaflet y Leaflet.markercluster; cartografía base © OpenStreetMap y proveedores de imágenes © Esri.</p>
+   <h3>Créditos y condiciones de uso</h3><p>Elaboración cartográfica y registro fotográfico: equipo de la salida de campo Lima–Satipo 2026. Las fotografías cuentan con autorización comunicada para su exhibición en este atlas; ello no supone una licencia general para redistribuirlas. Los datos GPS y la geografía publicada pueden descargarse al inspeccionar los archivos del sitio.</p>
+   <p class="info-highlight"><strong>Nota sobre fuentes:</strong> la metadata de la capa MINAM contiene una restricción histórica de «uso interno». Antes de difundir este sitio públicamente, se debe confirmar la condición de reutilización aplicable a dicha capa geográfica. El resto del diseño no acredita permisos de terceros por sí mismo.</p>
+   <p><strong>Recurso:</strong> <a href="https://www.minam.gob.pe/servicios-al-ciudadano/otros-servicios/geoservidor/" target="_blank" rel="noopener noreferrer">Geoservidor del MINAM</a> · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">atribución de OpenStreetMap</a>.</p>
+ </div>
+</dialog>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="datos.js"></script><script src="ruta.js"></script><script src="capas.js"></script><script src="perfil.js"></script><script src="hillshade_bounds.js"></script>
+<script>
+(()=>{'use strict';
+const photos=window.FOTOS||[], road=window.RUTA||[], ecojson=window.ECORREGIONES, pisosjson=window.PISOS, perfil=window.PERFIL||[];
+const $=id=>document.getElementById(id), esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+if(!window.L){$('map').innerHTML='<div style="padding:35px;max-width:500px">Para mostrar el mapa necesitas conexión a Internet (biblioteca Leaflet y mapa base). Comprueba la conexión y vuelve a abrir <b>index.html</b>. Las fotografías y las capas geográficas están guardadas localmente.</div>';return;}
+const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap colaboradores',maxZoom:19});
+const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{attribution:'Imágenes © Esri y proveedores',maxZoom:19});
+const map=L.map('map',{layers:[osm],preferCanvas:true,zoomControl:true,zoomSnap:.25}).setView([-11.62,-75.76],8);
+L.control.layers({'Calles · OpenStreetMap':osm,'Satélite · Esri':sat},null,{collapsed:true,position:'topright'}).addTo(map);
+const roadLayer=L.polyline(road,{color:'#2e3c49',weight:3,opacity:.9});
+const ecoLayer=L.geoJSON(ecojson,{style:f=>({color:'#64737b',weight:.7,fillColor:f.properties.color,fillOpacity:.58,opacity:.75}),onEachFeature:(f,l)=>{l.bindPopup(`<div class="regionpopup"><strong>${esc(f.properties.nombre)}</strong><small>Ecorregión de Brack Egg · polígono del corredor. La presencia en el mapa no implica necesariamente que la carretera lo atraviese.</small></div>`);}});
+const pisoLayer=L.geoJSON(pisosjson,{style:f=>({color:f.properties.color,weight:6,opacity:1,lineCap:'round'}),onEachFeature:(f,l)=>{let p=f.properties;l.bindPopup(`<div class="regionpopup"><strong>${esc(p.nombre)}</strong><div>Tramo de carretera: km ${p.km_ini.toFixed(2)} – ${p.km_fin.toFixed(2)}</div><small>Clasificación de Pulgar Vidal · estado: ${esc(p.estado)}${p.estado==='REVISAR'?' (revisar en campo)':''}</small></div>`);}});
+const hill=L.imageOverlay('hillshade.png',window.HILLSHADE_BOUNDS,{opacity:.72,interactive:false});
+const photoLayer=typeof L.markerClusterGroup==='function'?L.markerClusterGroup({maxClusterRadius:48,showCoverageOnHover:false,spiderfyOnMaxZoom:true,disableClusteringAtZoom:16,chunkedLoading:true}):L.layerGroup();
+const photoMarkers=new Map();let selectedType='Todas';let selectedPhoto=null;let showing=[];
+function dot(f){let cl=f.selected==='Fundamental'?'fund':f.selected==='Respaldo'?'respaldo':'';return L.divIcon({className:'dotwrap',html:`<span class="dot ${cl}"></span>`,iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-9]});}
+function date(s){return s?s.slice(6,8)+'/'+s.slice(4,6)+'/'+s.slice(0,4)+' · '+s.slice(9,17):'Sin fecha';}
+function popup(f){const nota=f.piso_tramo?`<p><b>Piso ecológico del tramo próximo:</b> ${esc(f.piso_tramo)}</p>`:'<p><b>Piso ecológico:</b> sin asignación automática (lejos de la ruta).</p>';
+ const warn=f.estado_piso==='REVISAR'?'<div class="note warn">Este tramo se encuentra marcado como REVISAR en la capa original.</div>':'';
+ return `<div class="photo-card"><img src="fotos/${esc(f.id)}.jpg" alt="Fotografía ${esc(f.id)}"><h3>${esc(f.id)} <span class="minitag">${esc(f.selected==='No seleccionada'?'REGISTRO GPS':f.selected)}</span></h3><p><b>Fecha:</b> ${esc(date(f.date))}</p><p><b>Sector:</b> ${esc(f.sector)}</p><p><b>Altitud GPS:</b> ${f.alt==null?'No registrada':Number(f.alt).toFixed(1)+' m s. n. m.'}</p><p><b>Distancia sobre la ruta:</b> km ${Number(f.km_ruta).toFixed(2)} (proyección aproximada)</p>${nota}<p><b>Ecorregión:</b> ${esc(f.ecorregion)}</p><p><b>Coordenadas GPS:</b> ${Number(f.lat).toFixed(6)}, ${Number(f.lon).toFixed(6)}</p>${warn}<div class="note">El piso se asignó al tramo de ruta más próximo, no mediante una delimitación puntual de pisos.</div><a class="open" href="fotos/${esc(f.id)}.jpg" target="_blank" rel="noopener">Ampliar fotografía ↗</a></div>`;
+}
+for(let f of photos){let m=L.marker([f.lat,f.lon],{icon:dot(f),title:`Foto ${f.id}`});m.bindPopup(()=>popup(f),{maxWidth:315});m.on('click',()=>{selectedPhoto=f;updateFocus(f.km_ruta)});photoMarkers.set(f.id,m)}
+const bounds=L.latLngBounds(road);map.fitBounds(bounds.pad(.06));
+// order overlays: relief under polygons and route; marker groups on top
+const toggles={layerhill:hill,layerecos:ecoLayer,layerroute:roadLayer,layerpisos:pisoLayer,layerphotos:photoLayer};
+function updateLayerOrder(){if(map.hasLayer(hill))hill.bringToBack();if(map.hasLayer(ecoLayer))ecoLayer.bringToFront();if(map.hasLayer(roadLayer))roadLayer.bringToFront();if(map.hasLayer(pisoLayer))pisoLayer.bringToFront();if(map.hasLayer(photoLayer)){photoLayer.bringToFront?.()}}
+for(let k in toggles)if($(k).checked)toggles[k].addTo(map);
+updateLayerOrder();
+const pisos=[...new Set(photos.map(f=>f.piso_tramo).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+const ecos=[...new Set(photos.map(f=>f.ecorregion).filter(x=>x!=='No determinada'))].sort((a,b)=>a.localeCompare(b,'es'));
+for(const [el,vals] of [[$('pisoFilter'),pisos],[$('ecoFilter'),ecos]]){for(const s of vals){const o=document.createElement('option');o.value=s;o.textContent=s;el.appendChild(o)}}
+function filtered(){const q=$('search').value.trim().toLocaleLowerCase('es');return photos.filter(f=>(selectedType==='Todas'||f.selected===selectedType)&&(!$('pisoFilter').value||f.piso_tramo===$('pisoFilter').value)&&(!$('ecoFilter').value||f.ecorregion===$('ecoFilter').value)&&(!q||[f.id,f.file,f.sector,f.piso_tramo,f.ecorregion,Number(f.km_ruta).toFixed(2)].some(t=>String(t||'').toLocaleLowerCase('es').includes(q))))}
+function showPhoto(f){selectedPhoto=f;map.setView([f.lat,f.lon],Math.max(11,map.getZoom()),{animate:true});let marker=photoMarkers.get(f.id);if(photoLayer.zoomToShowLayer){photoLayer.zoomToShowLayer(marker,()=>marker.openPopup())}else marker.openPopup();updateFocus(f.km_ruta);if(innerWidth<650){$('sidebar').classList.add('collapsed');setTimeout(()=>map.invalidateSize(),80)}}
+function renderGallery(){showing=filtered();photoLayer.clearLayers();if($('layerphotos').checked){const ms=showing.map(f=>photoMarkers.get(f.id));photoLayer.addLayers?photoLayer.addLayers(ms):ms.forEach(x=>photoLayer.addLayer(x))}
+ $('resultcount').textContent=`${showing.length} de ${photos.length} fotografías`;
+ const frag=document.createDocumentFragment();if(!showing.length){$('gallery').innerHTML='<div class="empty">No hay fotografías con esos filtros.<br>Prueba otra búsqueda.</div>';return;}
+ const sorted=showing.slice().sort((a,b)=>(['Fundamental','Respaldo','No seleccionada'].indexOf(a.selected)-['Fundamental','Respaldo','No seleccionada'].indexOf(b.selected))||(a.km_ruta-b.km_ruta));
+ for(const f of sorted){const b=document.createElement('button');b.className='item';b.type='button';b.innerHTML=`<img loading="lazy" src="miniaturas/${esc(f.id)}.jpg" alt="Miniatura de ${esc(f.id)}"><span class="iteminfo"><strong>${esc(f.id)} · km ${Number(f.km_ruta).toFixed(1)}</strong><small>${esc(f.sector)}</small><small>${esc(f.piso_tramo||'Piso no asignado')} · ${f.alt==null?'—':Number(f.alt).toFixed(0)+' m'}</small>${f.selected==='Fundamental'?'<span class="tag">Fundamental</span>':f.selected==='Respaldo'?'<span class="tag back">Respaldo</span>':''}</span>`;b.addEventListener('click',()=>{if(!$('layerphotos').checked){$('layerphotos').checked=true;photoLayer.addTo(map);renderGallery()}showPhoto(f)});frag.appendChild(b)}
+ $('gallery').replaceChildren(frag)}
+function renderLegend(){const present=[];if($('layerpisos').checked){present.push('<b>PISOS ECOLÓGICOS (PULGAR VIDAL)</b>');const seen=new Set();pisosjson.features.forEach(f=>{const p=f.properties;if(seen.has(p.nombre))return;seen.add(p.nombre);present.push(`<div class="legendrow"><span class="chip linechip" style="background:${p.color}"></span>${esc(p.nombre)}</div>`)})}
+if($('layerecos').checked){present.push('<b style="margin-top:9px">ECORREGIONES (BRACK EGG)</b>');ecojson.features.forEach(f=>{const p=f.properties;present.push(`<div class="legendrow"><span class="chip" style="background:${p.color}"></span>${esc(p.nombre)}</div>`)})}
+if($('layerhill').checked)present.push('<div class="legendrow"><span class="chip" style="background:#8d9499"></span>Relieve sombreado</div>');
+if($('layerroute').checked)present.push('<div class="legendrow"><span class="chip linechip" style="background:#2e3c49"></span>Ruta vial Lima–Satipo</div>');
+if($('layerphotos').checked)present.push('<div class="legendrow"><span class="chip" style="background:#d76a40;border-radius:50%;width:13px;height:13px;margin-left:6px;margin-right:6px"></span>Foto fundamental</div><div class="legendrow"><span class="chip" style="background:#317f99;border-radius:50%;width:13px;height:13px;margin-left:6px;margin-right:6px"></span>Otras fotos GPS</div>');
+if($('layerpisos').checked)present.push('<small>Los tramos proceden de la capa original: algunas categorías figuran como preliminares o por revisar.</small>');
+$('legend').innerHTML=present.join('')||'<small>Activa una capa para ver su simbología.</small>'}
+for(const [k,lyr] of Object.entries(toggles)){$(k).addEventListener('change',()=>{if($(k).checked)lyr.addTo(map);else map.removeLayer(lyr);if(k==='layerphotos')renderGallery();updateLayerOrder();renderLegend()})}
+$('search').addEventListener('input',renderGallery);$('pisoFilter').addEventListener('change',renderGallery);$('ecoFilter').addEventListener('change',renderGallery);
+for(const t of document.querySelectorAll('button.tab'))t.addEventListener('click',()=>{selectedType=t.dataset.type;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));renderGallery();if(selectedType==='Fundamental'){const b=L.latLngBounds(filtered().map(f=>[f.lat,f.lon]));if(b.isValid())map.fitBounds(b.pad(.09))}});
+$('clear').onclick=()=>{$('search').value='';$('pisoFilter').value='';$('ecoFilter').value='';selectedType='Todas';document.querySelectorAll('button.tab').forEach(x=>x.classList.toggle('active',x.dataset.type==='Todas'));renderGallery();map.fitBounds(bounds.pad(.05))};
+$('menu').onclick=()=>{$('sidebar').classList.toggle('collapsed');setTimeout(()=>map.invalidateSize(),75)};
+$('fit').onclick=()=>map.fitBounds(bounds.pad(.04));
+$('legendToggle').onclick=()=>$('legend').classList.toggle('hidden');
+$('layerprofile').onchange=()=>{if($('layerprofile').checked)$('profile').style.display='';else $('profile').style.display='none';};
+$('collapseProfile').onclick=()=>{const p=$('profile');p.classList.toggle('closed');$('collapseProfile').textContent=p.classList.contains('closed')?'Mostrar':'Ocultar'};
+if(innerWidth<650)$('sidebar').classList.add('collapsed');
+// Interactive elevation profile; source route heights sampled from the 100m DEM extracted table
+let path='',lastFocus=null;const psvg=$('profileSvg'),left=42,right=888,top=12,bot=117,maxX=439.44,maxY=5200;
+const X=km=>left+(km/maxX)*(right-left),Y=alt=>bot-(alt/maxY)*(bot-top);
+const segs=perfil.map((v,i)=>(i?'L':'M')+X(v[0]).toFixed(2)+','+Y(v[1]).toFixed(2));path=segs.join(' ');
+let html='';for(let y=0;y<=5000;y+=1000){html+=`<line class="grid" x1="${left}" x2="${right}" y1="${Y(y)}" y2="${Y(y)}"/><text x="${left-6}" y="${Y(y)+3}" text-anchor="end">${y}</text>`}
+for(let km=0;km<=400;km+=100){html+=`<line class="grid" x1="${X(km)}" x2="${X(km)}" y1="${top}" y2="${bot}"/><text x="${X(km)}" y="${bot+13}" text-anchor="middle">${km}</text>`}
+html+=`<line class="axis" x1="${left}" y1="${bot}" x2="${right}" y2="${bot}"/><path class="line" d="${path}"/>`;
+for(const [km,nm,peak] of [[144.58,'Ticlio',true],[187.78,'La Oroya',false],[242.9,'Tarma',false],[315.4,'La Merced',false]])html+=`<line class="guide ${peak?'peak':''}" x1="${X(km)}" x2="${X(km)}" y1="${top}" y2="${bot}"/><text x="${X(km)+2}" y="${top+9}" transform="rotate(-90 ${X(km)+2} ${top+9})" text-anchor="end" style="font-size:9px">${nm}</text>`;
+html+=`<line id="focusline" class="focus" x1="-10" x2="-10" y1="${top}" y2="${bot}"/><text x="${right}" y="${bot+13}" text-anchor="end">439 km</text><text x="5" y="11" style="font-size:9px">m</text><rect class="clickzone" x="${left}" y="0" width="${right-left}" height="${bot}"/>`;
+psvg.innerHTML=html;
+function updateFocus(km){if(!Number.isFinite(Number(km)))return;lastFocus=Number(km);const l=$('focusline');l.setAttribute('x1',X(lastFocus));l.setAttribute('x2',X(lastFocus));$('profiletip').textContent=`km ${lastFocus.toFixed(1)}`}
+let focusMarker=null;
+psvg.addEventListener('click',evt=>{const box=psvg.getBoundingClientRect(),px=(evt.clientX-box.left)*900/box.width,km=Math.max(0,Math.min(maxX,(px-left)/(right-left)*maxX));let chosen=perfil[0],best=Infinity;for(const row of perfil){let d=Math.abs(row[0]-km);if(d<best){best=d;chosen=row}}const [actual,alt,lat,lon]=chosen;updateFocus(actual);if(focusMarker)map.removeLayer(focusMarker);focusMarker=L.circleMarker([lat,lon],{radius:8,color:'#d95f47',fillColor:'#fff',weight:3,fillOpacity:.95}).addTo(map).bindPopup(`<div class="regionpopup"><strong>Perfil altitudinal</strong><div>Km ${actual.toFixed(2)} · ${alt.toFixed(0)} m s. n. m. (DEM)</div><small>Altitud interpolada del DEM del transecto; puede diferir de GPS.</small></div>`).openPopup();map.setView([lat,lon],Math.max(10,map.getZoom()))});
+renderGallery();renderLegend();
+})();
+</script>
+<script>
+/* La portada y la ficha son independientes de la biblioteca Leaflet. */
+(()=>{
+ const intro=document.getElementById('landing');
+ const about=document.getElementById('aboutDialog');
+ const open=()=>{if(typeof about.showModal==='function'){about.showModal();}else{about.setAttribute('open','');}};
+ const close=()=>{if(typeof about.close==='function')about.close();else about.removeAttribute('open');};
+ const enter=()=>{intro.classList.add('is-hidden');intro.setAttribute('aria-hidden','true');document.getElementById('aboutOpen').focus();window.dispatchEvent(new Event('resize'));};
+ document.getElementById('enterAtlas').addEventListener('click',enter);
+ document.getElementById('fromLandingAbout').addEventListener('click',open);
+ document.getElementById('aboutOpen').addEventListener('click',open);
+ document.getElementById('aboutClose').addEventListener('click',close);
+ about.addEventListener('click',e=>{if(e.target===about)close();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!intro.classList.contains('is-hidden')&&!about.open)enter();});
+ document.getElementById('enterAtlas').focus();
+})();
+</script>
+<noscript><div style="position:fixed;inset:0;z-index:999999;background:white;color:#203b56;padding:40px">Este atlas necesita JavaScript habilitado para mostrar el mapa interactivo.</div></noscript>
+</body></html>

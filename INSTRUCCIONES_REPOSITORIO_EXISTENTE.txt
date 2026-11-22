@@ -1,0 +1,20 @@
+ATLAS LIMA–SATIPO — IMPORTAR EN EL REPOSITORIO YA CREADO
+
+Repositorio: https://github.com/pierojesusmoralesfigueroa-a11y/atlas-lima-satipo-2026
+
+1. Extrae este ZIP.
+2. Abre GitHub Desktop e inicia sesión.
+3. File > Clone repository, selecciona atlas-lima-satipo-2026.
+4. Repository > Show in Explorer.
+5. Copia el CONTENIDO de la carpeta extraída dentro de la carpeta clonada.
+   index.html debe quedar en la raíz del repositorio.
+6. En GitHub Desktop: Commit to main > Push origin.
+7. Comprueba que index.html, fotos/ y miniaturas/ estén en GitHub.
+
+ANTES DE HACERLO PÚBLICO:
+Verifica la autorización de redistribución de la capa de ecorregiones del MINAM,
+cuyos metadatos incluyen una indicación de uso interno. Revisa la publicación
+de coordenadas GPS exactas de las fotografías.
+
+Para GitHub Pages: Settings > Pages > Deploy from a branch > main > /(root).
+Con GitHub Free el repositorio necesita ser público para usar GitHub Pages.

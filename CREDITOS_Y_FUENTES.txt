@@ -1,0 +1,16 @@
+ATLAS GEOGRÁFICO Y FOTOGRÁFICO LIMA–SATIPO 2026
+
+Proyecto académico estudiantil vinculado a la UNMSM; no es un sitio oficial.
+Fotografías: registros de campo octubre de 2026; autorización de exhibición comunicada.
+Cartografía: ruta Lima–Satipo corregida a partir de red vial MTC–Provías;
+Tramos de pisos ecológicos basados en la clasificación de Pulgar Vidal;
+ecorregiones basadas en clasificación de Brack Egg y capa geográfica MINAM;
+relieve derivado de DEM ANADEM de 30 m; mapas base OpenStreetMap y Esri.
+
+ATENCIÓN: LOS METADATOS DEL ARCHIVO ECORREGIONES_Brack_Corredor.shp.xml INCLUYEN
+UNA NOTA DE USO INTERNO DEL MINAM. CORROBORAR EL DERECHO DE REUTILIZACIÓN
+Y REDISTRIBUCIÓN DE LA GEOMETRÍA ANTES DE PUBLICAR ESTE PAQUETE EN ABIERTO.
+
+El sitio contiene coordenadas GPS precisas de las fotos en datos.js.
+Las fotografías autorizadas para este atlas no se entregan bajo licencia libre
+ni se permite su explotación fuera de este proyecto sin nuevas autorizaciones.

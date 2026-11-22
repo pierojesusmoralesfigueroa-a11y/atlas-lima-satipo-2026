@@ -1,0 +1,59 @@
+ATLAS GEOGRÁFICO INTERACTIVO · LIMA–SATIPO · VERSIÓN 2
+=====================================================
+
+CÓMO ABRIR
+1. Extraer COMPLETA la carpeta del ZIP (con fotos, miniaturas y archivos .js).
+2. Doble clic en index.html para abrir en Chrome, Edge o Firefox.
+3. Se necesita Internet para Leaflet, agrupación de puntos y mapas base.
+   Las fotografías, polígonos, ruta y el sombreado están dentro de la carpeta.
+
+FUNCIONES
+- 243 fotografías GPS, con miniatura y foto ampliada.
+- Agrupación por proximidad de puntos (se expande al aumentar el zoom).
+- Búsqueda y filtros por tipo de foto, piso ecológico y ecorregión.
+- Capa de pisos ecológicos de Pulgar Vidal (13 tramos de la capa recibida).
+- Capa de ecorregiones de Brack Egg (6 polígonos del shapefile recibido).
+- Relieve sombreado generado del DEM ANADEM de 30 m (overlay PNG web).
+- Ruta de 439,44 km y perfil altitudinal interactivo; clic en el gráfico
+  muestra localización sobre el recorrido.
+- Mapas base OpenStreetMap (calles) y Esri World Imagery (satélite).
+- Pantalla adaptable a computadora o celular.
+
+FUENTES Y PRECISIÓN
+- Ecorregiones_Brack_Corredor.shp (EPSG:32718, recorte SIG recibido).
+- Tramos_Pisos_PV_AUTO.geojson del paquete Pisos_Ecologicos_Automaticos_Lima_Satipo.zip.
+- Ruta_Lima_Satipo_Final.shp, longitud calculada 439.439533 km.
+- DEM_Lima_Junin_Corredor_15km_30m.tif (30m). El hillshade creado aquí es una
+  representación web nueva; no es una exportación idéntica de ArcGIS Pro.
+- Inventario fotográfico GPS original de campo (243 registros).
+- Los 13 tramos de pisos muestran el estado ORIGINAL: REVISAR y PRELIMINAR,
+  incluyendo Janca (candidata). No se han declarado validados.
+- El piso de cada foto se estima por el tramo vial más cercano: no demuestra
+  que el punto esté dentro de una unidad cartográfica delimitada.
+  237 fotos están a <=7 km de la ruta. 6 fotos alejadas sin piso asignado.
+- El KM de las fotos es la proyección de la ubicación sobre la ruta final,
+  NO el kilometraje del vehículo ni una medida del recorrido de campo exacto.
+- Coordenadas de ecorregiones, ruta y tramos se transformaron a WGS 84 geográfico
+  para visualizarse con Leaflet, preservando los originales.
+- El perfil altitudinal visual usa puntos cada ~400m tomados de la serie a 100m.
+- Algunas descripciones de sectores son orientativas, tal como en inventario.
+
+PRIVACIDAD / PUBLICACIÓN
+- Esta versión es LOCAL; no publica ni sube fotos a un servidor.
+- Las coordenadas precisas están en datos.js y las imágenes dentro de /fotos.
+- Revisar autorización de las personas fotografiadas, ubicaciones sensibles,
+  privacidad y derechos de las imágenes ANTES de compartir públicamente el ZIP
+  o publicar el visor en la web.
+- Respeta términos de OpenStreetMap, Esri y proveedores de imágenes.
+
+CARPETAS
+  index.html   interfaz
+  datos.js     metadatos de 243 fotos
+  fotos/       fotografías optimizadas
+  miniaturas/  imágenes pequeñas
+  ruta.js      vía final (simplificada para la web)
+  capas.js     13 tramos y seis ecorregiones
+  perfil.js    perfil de elevación web
+  hillshade.png, hillshade_bounds.js  relieve sobre mapa
+
+NO SE REQUIERE INSTALAR ARCGIS PRO PARA ABRIR EL VISOR.
