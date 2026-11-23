@@ -1,0 +1,11 @@
+AMPLIACIÓN TEMÁTICA DEL ATLAS LIMA–SATIPO 2026
+
+PISOS ALTITUDINALES: representación aproximada por bandas altimétricas, generada con ANADEM Junín 30 m en los rangos indicados en el diseño cartográfico de referencia: Omagua 0–400 m, Rupa Rupa 400–1000 m, Yunga fluvial 1000–2300 m, Quechua 2300–3500 m, Suni 3500–4000 m, Puna 4000–4800 m y Janca >=4800 m. La delimitación de regiones naturales de Pulgar Vidal no depende únicamente de la altitud, por lo que esto NO es una delimitación ecológica definitiva. El PNG web es una generalización de ~150 m de la fuente DEM 30 m, no una escena más precisa.
+
+CLIMA: basado en el shapefile de la clasificación climática Thornthwaite–SENAMHI (2020) aportado en MAPA_03/SATIPOMAPS, recortado al polígono provincial de referencia y simplificado. El archivo tiene 14 códigos en la provincia, etiquetados con código original para evitar denominaciones no sustentadas.
+
+USO DEL SUELO: geoservicio WMS de GeoBosques, "uso_cambio_uso_2020", capa 0, obtenido de SATIPOMAPS.qgz. Los mosaicos remotos dependen de la disponibilidad del servidor externo; si no cargan el visor muestra advertencia y enlace a la fuente. No hay shapefile local de uso del suelo en MAPA_03. NO CONFUNDIR con cobertura vegetal 2015.
+
+LIMITE: polígono de referencia obtenido de la unión distrital presente en MAPA_03. Revisar vigencia de límites distritales, especialmente Mazamari/Pangoa.
+
+NOTAS: no se ha modificado ni omitido la vista original del atlas. El nuevo archivo satipo_temas.html agrega una sección independiente. Fuente DEM: ANADEM; clima: SENAMHI 2020; servicio WMS: GeoBosques; compaginación: trabajo académico de Geografía Humana UNMSM 2026.
