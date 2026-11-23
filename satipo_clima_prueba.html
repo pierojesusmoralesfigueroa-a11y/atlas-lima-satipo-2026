@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Visor de prueba de clasificación climática SENAMHI en la provincia de Satipo, integrado al Atlas Lima–Satipo 2026.">
-<title>Satipo · Clima SENAMHI | Atlas Lima–Satipo 2026</title>
+<title>Satipo · Clima 1981–2010 | Atlas Lima–Satipo 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{--ink:#203c4d;--navy:#173c4d;--green:#2b735f;--sub:#647985;--line:#d9e3e5;--bg:#f4f7f8}
@@ -35,26 +35,26 @@ a{color:#236c71}.source{font-size:11px;color:#637882;line-height:1.5;margin-top:
 </head>
 <body>
 <header>
- <div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>ATLAS INTERACTIVO · SATIPO</strong><small>Módulo experimental · Clasificación climática SENAMHI</small></div></div>
+ <div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>ATLAS INTERACTIVO · SATIPO</strong><small>Módulo experimental · Climas 1981–2010 · SENAMHI</small></div></div>
  <a class="back" href="satipo.html">← Cobertura vegetal 2015</a>
 </header>
 <div class="shell">
 <aside class="panel">
  <div class="eyebrow">Análisis territorial · Satipo</div>
  <h1>Clasificación climática</h1>
- <p>Visualización de la <strong>clasificación climática del Perú del SENAMHI</strong> sobre la provincia de Satipo. Se consume el servicio WMS señalado por el catálogo SINIA, sin sustituir ni modificar la cobertura vegetal histórica del atlas.</p>
- <div id="status" class="status" role="status" aria-live="polite">Conectando con el WMS de SENAMHI…</div>
- <div class="control"><label><input type="checkbox" id="clima" checked> <strong>Clima · SENAMHI</strong></label><small>Mapa temático nacional visible sobre el ámbito provincial.</small><label for="opacity" style="display:block;margin-top:14px">Opacidad de la capa: <output id="opacityValue">78 %</output></label><input class="range" type="range" min="20" max="100" step="5" value="80" id="opacity"></div>
+ <p>Visualización de la <strong>clasificación climática del SENAMHI actualizada en 2020–2021</strong>, con periodo de referencia <strong>1981–2010</strong>. Se usa la capa WMS identificada por el catálogo oficial de geoservicios del SENAMHI, sin modificar la cobertura vegetal histórica del atlas.</p>
+ <div id="status" class="status" role="status" aria-live="polite">Conectando con la capa WMS de clasificación climática 1981–2010…</div>
+ <div class="control"><label><input type="checkbox" id="clima" checked> <strong>Clima 1981–2010 · SENAMHI</strong></label><small>Clasificación nacional en vista centrada en Satipo. El WMS también muestra territorios vecinos; esta página todavía no recorta sus imágenes al límite provincial.</small><label for="opacity" style="display:block;margin-top:14px">Opacidad de la capa: <output id="opacityValue">80 %</output></label><input class="range" type="range" min="20" max="100" step="5" value="80" id="opacity"></div>
  <div class="control"><label><input type="checkbox" id="limite" checked> Límite provincial de referencia</label><br><label><input type="checkbox" id="fotos"> Fotografías GPS (octubre de 2026)</label><small>Las fotografías documentan la salida de campo, no sirven para validar por sí solas la clasificación climática.</small></div>
  <div class="legend"><strong>Leyenda oficial del servicio</strong><img id="legendImage" alt="Leyenda de clasificación climática SENAMHI" loading="lazy"><small id="legendFallback" style="display:none">El servicio no proporciona una leyenda accesible en este momento.</small></div>
  <hr>
- <div class="note"><strong>Alcance:</strong> vista experimental. La clasificación climática proviene del SENAMHI; la delimitación provincial corresponde al archivo del atlas y debe verificarse con los límites administrativos vigentes. Este WMS representa una imagen de mapa, no polígonos locales editables, y puede quedar temporalmente fuera de servicio.</div>
- <p class="source"><strong>Fuentes:</strong> SENAMHI / IDESEP, servicio WMS de clasificación climática publicado en el catálogo del SINIA (2022). Límites: referencia INEI ya incluida en el atlas.<br>
- <a href="https://sinia.minam.gob.pe/node/56" target="_blank" rel="noopener noreferrer">Ficha de fuente en SINIA</a> · <a href="https://idesep.senamhi.gob.pe/portalidesep/wms.do" target="_blank" rel="noopener noreferrer">Directorio IDESEP</a> · <a href="index.html">Atlas general</a></p>
+ <div class="note"><strong>Alcance:</strong> vista experimental. La clasificación corresponde al periodo de referencia 1981–2010 y no representa el tiempo actual ni los cambios posteriores. La capa WMS es nacional y no está recortada al límite provincial; la línea punteada señala el ámbito de Satipo. El límite del atlas necesita comprobarse con la cartografía administrativa vigente. El servicio remoto puede presentar interrupciones.</div>
+ <p class="source"><strong>Fuentes:</strong> SENAMHI / IDESEP, capa de Clasificación Climática 1981–2010 registrada en su catálogo WFS; consulta del WMS del servicio g_05_01. Límites: referencia INEI ya incluida en el atlas.<br>
+ <a href="https://idesep.senamhi.gob.pe/portalidesep/idesep_componente_catalogo_geoservicios_wfs.jsp" target="_blank" rel="noopener noreferrer">Catálogo oficial WFS SENAMHI</a> · <a href="https://idesep.senamhi.gob.pe/portalidesep/wms.do" target="_blank" rel="noopener noreferrer">Directorio IDESEP</a> · <a href="index.html">Atlas general</a></p>
 </aside>
 <main class="main">
  <div id="map" class="map" role="region" aria-label="Mapa interactivo con clasificación climática de Satipo"></div>
- <div class="banner"><strong>Satipo · Junín, Perú</strong><span>Clima SENAMHI · vista WMS de prueba</span></div>
+ <div class="banner"><strong>Satipo · Junín, Perú</strong><span>Clasificación climática 1981–2010 · SENAMHI</span></div>
 </main>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -71,11 +71,11 @@ var satellite=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/
 L.control.layers({'Calles · OSM':streets,'Satélite · Esri':satellite},null,{position:'topright'}).addTo(map);
 var border=L.geoJSON(window.LIMITE_SATIPO,{style:{color:'#183e38',weight:2.6,fillOpacity:0,dashArray:'7,4'},interactive:false}).addTo(map);
 if(border.getBounds().isValid())map.fitBounds(border.getBounds().pad(.06));
-var base='https://idesep.senamhi.gob.pe/geoserver/g_05_01/wms';
-var name='05_01_001_03_001_512_0000_00_00';
+var base='https://idesep.senamhi.gob.pe:443/geoserver/g_05_01/wms';
+var name='g_05_01:05_01_001_03_001_512_2021_00_00';
 var climate=L.tileLayer.wms(base,{layers:name,format:'image/png',transparent:true,version:'1.1.1',opacity:.8,attribution:'Clasificación climática © SENAMHI / IDESEP'});
 var successes=0, failures=0;
-climate.on('tileload',function(){successes++;if(successes===1){status.textContent='Se recibieron imágenes del WMS de SENAMHI. Consulta la leyenda para interpretar las clases.';}});
+climate.on('tileload',function(){successes++;if(successes===1){status.textContent='El servidor respondió con imágenes de la clasificación climática 1981–2010. Comprueba visualmente los colores; la versión WMS se encuentra en evaluación.';}});
 climate.on('tileerror',function(){failures++;if(failures>=4&&successes===0){status.textContent='El servicio WMS no está respondiendo. La base cartográfica y el límite provincial siguen disponibles; puedes reintentar más tarde.';status.style.background='#fff0e5';}});
 climate.addTo(map);border.bringToFront();
 document.getElementById('clima').addEventListener('change',function(e){if(e.target.checked){climate.addTo(map);border.bringToFront();}else map.removeLayer(climate);});
