@@ -1,0 +1,22 @@
+Atlas Lima–Satipo 2026 / Módulo: Cobertura vegetal de Satipo (MINAM 2015)
+
+FUENTES:
+Ministerio del Ambiente del Perú (MINAM). (2015). Mapa Nacional de Cobertura Vegetal. SINIA. https://sinia.minam.gob.pe/mapas/mapa-nacional-cobertura-vegetal
+Registro SINIA de licencia: Creative Commons Attribution 4.0 International (CC BY 4.0). Se requiere atribución.
+Archivo local fuente: mapa_cobertura_vegetal_2015.zip / CobVeg_180615.shp, atributo CobVeg2013.
+Límites de referencia: DISTRITOS.shp, campo PROVINCIA=SATIPO, fuente INEI declarada en atributo FUENTE.
+
+METODOLOGÍA:
+1) Selección espacial de polígonos de cobertura que intersectan provincia de Satipo (EPSG:32718).
+2) Intersección precisa con geometría provincial; estadísticas de superficie calculadas antes de simplificación.
+3) Simplificación de geometrías en EPSG:32718 con tolerancia 145 metros, preservando topología por polígono; exportación a WGS84 (EPSG:4326).
+4) Cuantización de coordenadas a 5 decimales para visualización web.
+5) Advertencia: la delimitación distrital de la capa utilizada agrupa Mazamari-Pangoa y no puede mostrarse como delimitación distrital actualizada. Se utiliza solamente su unión para recortar el ámbito provincial.
+6) Las 18 categorías y las áreas obtenidas representan el mapa histórico, no la cobertura actual de 2026.
+7) Fotografías GPS: banco original de octubre de 2026 del Atlas Lima–Satipo; no inferir cambios de cobertura entre 2015 y 2026 a partir de un solo registro puntual.
+
+RESULTADO:
+Provincia de Satipo: 19 148,11 km² (según fuente distrital). 3047 polígonos; 18 clases de cobertura vegetal; 2,06 MB de GeoJSON simplificado embebido en JS.
+
+REPRODUCIBILIDAD:
+Ver resúmenes por clase y script de procesamiento; no sustituye el shapefile fuente para análisis de precisión.

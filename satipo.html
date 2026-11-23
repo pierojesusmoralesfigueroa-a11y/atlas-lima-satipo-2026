@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Satipo · Cobertura vegetal 2015 | Atlas Lima–Satipo 2026</title>
+<meta name="description" content="Cobertura vegetal histórica de la provincia de Satipo (MINAM, 2015): mapa interactivo, categorías, áreas, fotografías y metodología.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<style>
+:root{--navy:#203b56;--ink:#273b44;--accent:#2c7258;--paper:#f7f8f6;--line:#e2e8e4;--muted:#6c7f82}
+*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,Segoe UI,system-ui,Arial,sans-serif;background:var(--paper);color:var(--ink)}a{color:#246a7e}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #6bbdb0;outline-offset:2px}
+header{height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--navy);color:#fff;padding:10px 23px;border-bottom:3px solid #d4a45a}
+.brand{display:flex;align-items:center;gap:12px}.mark{font-size:26px;border:1px solid #93a8b7;border-radius:11px;padding:7px 12px}.brand strong{display:block;font-size:16px;letter-spacing:.4px}.brand small{display:block;font-size:11px;color:#d1dde5;margin-top:3px}.head-actions{display:flex;align-items:center;gap:10px}.return{border:1px solid #9eb3c5;color:#fff;text-decoration:none;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:700;background:#ffffff12}.return:hover{background:#ffffff26}.open-panel{border:1px solid #9eb3c5;background:#ffffff1c;color:#fff;border-radius:8px;padding:9px 12px;display:none}
+.shell{display:flex;height:calc(100dvh - 70px);min-height:440px}.sidebar{width:377px;flex:0 0 377px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;box-shadow:2px 0 14px #1d425010;z-index:650}.sidebar-intro{padding:22px 22px 17px;border-bottom:1px solid var(--line)}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;font-weight:800;color:#588374}.sidebar-intro h1{font-size:25px;line-height:1.15;letter-spacing:-.6px;margin:9px 0}.subtitle{color:var(--muted);font-size:12px;line-height:1.6;margin:7px 0 0}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:15px}.metric{background:#f3f7f3;padding:12px 9px;border-radius:9px}.metric b{display:block;font-size:17px;color:#284f43}.metric span{display:block;font-size:10px;color:#657d76;margin-top:4px;line-height:1.3}
+.switches{padding:14px 20px 12px;display:flex;gap:10px;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);flex-wrap:wrap}.switches label{display:flex;gap:7px;align-items:center;color:#36545d;font-size:11px}.switches input{accent-color:#2f775e}.filterbar{padding:14px 20px 10px}.filterhead{display:flex;align-items:center;justify-content:space-between;gap:10px}.filterhead b{font-size:13px}.filterhead button{border:0;background:none;color:#297b76;font-size:11px;font-weight:700;padding:4px}.search{border-radius:7px;border:1px solid #dbe5e2;padding:10px 12px;width:100%;margin:10px 0 1px;font-size:12px;background:#fff;color:#28424c}
+.classes{overflow:auto;flex:1;padding:0 11px 10px}.classitem{width:100%;display:flex;align-items:center;gap:10px;padding:10px 9px;border:1px solid transparent;border-radius:9px;text-align:left;background:#fff;color:#2d4750;margin:3px 0;min-height:54px}.classitem:hover{background:#f3f8f5}.classitem.active{border-color:#93c5b1;background:#eaf5ee}.swatch{width:18px;height:18px;flex:none;border:1px solid #4d635535;border-radius:4px}.classtxt{flex:1;min-width:0}.classtxt b{display:block;font-size:11px;line-height:1.3}.classtxt small{display:block;color:#758b8a;font-size:10px;margin-top:4px}.area{text-align:right;font-size:11px;font-weight:750;white-space:nowrap;color:#406455}.area small{display:block;font-size:10px;color:#849691;font-weight:500;margin-top:2px}.foot{padding:12px 19px;border-top:1px solid var(--line);background:#f9fbf9;font-size:10px;line-height:1.48;color:#6f817d}.foot strong{color:#3b584d}
+.main{flex:1;min-width:0;position:relative}#map{height:100%;width:100%;background:#e3ede7}.map-banner{position:absolute;z-index:450;top:15px;left:15px;max-width:280px;padding:12px 14px;background:#fffffff0;border:1px solid #dfe8e2;border-radius:9px;box-shadow:0 3px 15px #163a2424;pointer-events:none}.map-banner b{font-size:12px;color:#365f50;display:block}.map-banner small{display:block;font-size:10px;margin-top:5px;line-height:1.4;color:#72857b}.leaflet-control-layers{font-size:12px;border-radius:9px!important}.leaflet-popup-content{font-size:12px;line-height:1.55}.leaflet-popup-content h3{margin:0 0 8px;font-size:15px}.photo-pop{min-width:210px}.photo-pop img{max-width:240px;width:100%;height:155px;object-fit:cover;border-radius:7px;margin-bottom:7px}.photo-pop p{margin:5px 0}.photo-pop a{font-weight:700}.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:#b6d6c1b0!important}.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#2c715a!important;color:#fff!important}
+.status{position:absolute;left:15px;bottom:16px;z-index:450;background:#fffffff2;box-shadow:0 3px 12px #133a1c21;border-radius:10px;padding:9px 12px;font-size:10px;color:#4b6a5b;max-width:340px;line-height:1.45}.status b{color:#245c44}.footer-tag{font-size:9px;margin-top:5px;color:#7b8f87}
+@media(max-width:900px){.sidebar{width:335px;flex-basis:335px}.sidebar-intro{padding:17px 16px}.classes{padding:0 8px}.filterbar{padding:10px 14px}.switches{padding:11px 14px}.metric b{font-size:15px}}
+@media(max-width:690px){header{height:62px;padding:8px 10px}.brand strong{font-size:12px}.brand small{font-size:9px}.mark{display:none}.return{padding:9px;font-size:11px}.open-panel{display:block}.shell{height:calc(100dvh - 62px);display:block}.sidebar{position:absolute;left:0;top:62px;bottom:0;width:min(92vw,350px);z-index:1000;box-shadow:4px 0 20px #213e4a35}.sidebar.closed{display:none}.main{height:100%}.map-banner{left:8px;top:9px;padding:8px 10px;max-width:200px}.status{left:8px;right:8px;bottom:12px;max-width:unset}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>ATLAS INTERACTIVO · SATIPO</strong><small>Cobertura vegetal histórica · MINAM 2015</small></div></div>
+  <nav class="head-actions"><a href="index.html" class="return">← Transecto Lima–Satipo</a><button id="panelButton" class="open-panel" type="button" aria-label="Mostrar categorías">☰ Capas</button></nav>
+</header>
+<div class="shell">
+<aside class="sidebar" id="sidePanel">
+  <section class="sidebar-intro">
+    <div class="eyebrow">Análisis territorial · Selva central</div>
+    <h1>La cobertura vegetal de Satipo</h1>
+    <p class="subtitle">Explora las clases del <strong>Mapa Nacional de Cobertura Vegetal (2015)</strong>, recortadas a la provincia de Satipo. Selecciona una categoría para identificar su distribución espacial.</p>
+    <div class="metrics"><div class="metric"><b id="areaTotal">—</b><span>km² de área de estudio</span></div><div class="metric"><b id="classTotal">—</b><span>clases presentes</span></div><div class="metric"><b id="featureTotal">—</b><span>polígonos analizados</span></div></div>
+  </section>
+  <div class="switches"><label><input id="showCoverage" type="checkbox" checked> Cobertura</label><label><input id="showPhotos" type="checkbox" checked> Fotos GPS</label><label><input id="showBorder" type="checkbox" checked> Límite provincial</label></div>
+  <div class="filterbar"><div class="filterhead"><b>Distribución por categoría</b><button id="reset" type="button">Mostrar todas</button></div><input type="search" id="search" class="search" placeholder="Buscar bosque, pajonal, río…" aria-label="Buscar cobertura vegetal"></div>
+  <div class="classes" id="classList" aria-live="polite"></div>
+  <div class="foot"><strong>Fuente cartográfica:</strong> MINAM, Mapa Nacional de Cobertura Vegetal (2015), bajo CC BY 4.0. Geometría recortada y generalizada para visualización web; cálculos de superficie derivados de los polígonos originales recortados.<br><a href="https://sinia.minam.gob.pe/mapas/mapa-nacional-cobertura-vegetal" target="_blank" rel="noopener">Consultar fuente y licencia</a> · <a href="https://www.creativecommons.org/licenses/by/4.0/deed.es" target="_blank" rel="noopener">CC BY 4.0</a><br><strong>Importante:</strong> datos históricos, no representan los cambios de cobertura hasta 2026.</div>
+</aside>
+<main class="main"><div id="map" role="region" aria-label="Mapa interactivo de cobertura vegetal de Satipo"></div><div class="map-banner"><b>Satipo · provincia de Junín</b><small>18 categorías · MINAM 2015 · WGS 84. Haz clic en cualquier polígono para consultar su clasificación.</small></div><div class="status" id="status"><b>Cobertura vegetal 2015</b><div>Mapa temático histórico del territorio provincial. Las fotografías son registros de octubre de 2026.</div><div class="footer-tag">Fuente: MINAM / procesamiento SIG académico</div></div></main>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="cobertura_satipo.js"></script><script src="cobertura_resumen.js"></script><script src="satipo_limite.js"></script><script src="datos.js"></script>
+<script>
+'use strict';
+const cobertura=window.COBERTURA_SATIPO, resumen=window.RESUMEN_COBERTURA, limite=window.LIMITE_SATIPO;
+const fmt=n=>new Intl.NumberFormat('es-PE',{maximumFractionDigits:1}).format(n);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const colors={
+'Bosque de montaña basimontano':'#358c63','Bosque de montaña montano':'#186b4e','Bosque de montaña':'#5a9e75','Bosque de montaña altimontano':'#225a4d','Bosque semideciduo de montaña':'#9bad67',
+'Bosque de colina alta':'#568a3b','Bosque de colina baja':'#82a467','Bosque de terraza alta':'#74a87a','Bosque de terraza baja':'#a4c69d','Bosque de terraza baja con paca':'#84b7a5',
+'Areas de no bosque amazónico':'#efc67f','Pajonal andino':'#b5aa6e','Matorral arbustivo':'#baa47a','Matorral arbustivo altimontano':'#a99c76','Area altoandina con escasa y sin vegetación':'#d4c9b9','Lagunas, lagos y cochas':'#77bcd0','Río':'#5aaccd','Vegetación de isla':'#99b994','Glaciar':'#b6d6e1','Bofedal':'#73b8a4','Area urbana':'#cf9184','Plantación Forestal':'#87af86','Agricultura costera y andina':'#e6d38d'};
+function colorFor(n){return colors[n]||'#91a48a'};
+const osm=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'});
+const sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Imagery © Esri and its data providers'});
+const map=L.map('map',{layers:[osm],zoomSnap:.25,preferCanvas:true,zoomControl:true}).setView([-11.22,-74.83],9);
+L.control.layers({'Calles · OpenStreetMap':osm,'Satélite · Esri':sat},null,{position:'topright'}).addTo(map);
+const border=L.geoJSON(limite,{style:()=>({color:'#193f39',weight:2.6,opacity:.92,fillOpacity:0,dashArray:'7,4'}),interactive:false}).addTo(map);
+let allLayer=L.layerGroup().addTo(map), groupByCategory=new Map(), selectCategory=null, showCoverage=true;
+const canvasRenderer=L.canvas({padding:.12});
+function polygonStyle(feat){return {color:colorFor(feat.properties.categoria),weight:.15,opacity:.72,fillColor:colorFor(feat.properties.categoria),fillOpacity:.74,renderer:canvasRenderer}};
+const layerFeatures=L.geoJSON(cobertura,{style:polygonStyle,onEachFeature:(feature,layer)=>{
+  const p=feature.properties;
+  layer.bindPopup(`<h3>${esc(p.categoria)}</h3><b>Superficie del polígono:</b> ${fmt(p.area_km2)} km²<br><b>Código:</b> ${esc(p.simbolo)}<br><small>MINAM 2015 · geometría simplificada para visualización. No indica por sí misma cambios posteriores ni causas de pérdida de bosque.</small>`);
+  let c=groupByCategory.get(p.categoria);if(!c){c=L.layerGroup();groupByCategory.set(p.categoria,c)}c.addLayer(layer);
+}});
+allLayer.addLayer(layerFeatures);
+const bounds=border.getBounds();if(bounds.isValid())map.fitBounds(bounds.pad(.06));
+const photoGroup=typeof L.markerClusterGroup==='function'?L.markerClusterGroup({maxClusterRadius:42}):L.layerGroup();
+let nPhotos=0;
+for(const f of (window.FOTOS||[])){
+ if(!String(f.sector||'').includes('Satipo'))continue;
+ if(!Number.isFinite(+f.lat)||!Number.isFinite(+f.lon))continue;
+ const marker=L.marker([+f.lat,+f.lon],{title:`Fotografía ${f.id}`});
+ marker.bindPopup(`<div class="photo-pop"><img loading="lazy" src="miniaturas/${encodeURIComponent(f.id)}.jpg" alt="Fotografía ${esc(f.id)} de la salida de campo"><b>Registro ${esc(f.id)}</b><p>Satipo y alrededores · ${esc(f.date||'octubre de 2026')}</p><p>${fmt(+f.alt)} m s. n. m. (GPS)</p><a href="fotos/${encodeURIComponent(f.id)}.jpg" target="_blank" rel="noopener">Abrir fotografía original</a></div>`);
+ photoGroup.addLayer(marker);nPhotos++;
+}
+photoGroup.addTo(map);
+const id=str=>document.getElementById(str);
+id('areaTotal').textContent=fmt(resumen.provincia_km2);
+id('classTotal').textContent=resumen.clases;
+id('featureTotal').textContent=new Intl.NumberFormat('es-PE').format(resumen.total_features);
+function applyCategory(){allLayer.clearLayers();if(!showCoverage)return;const layer=selectCategory?groupByCategory.get(selectCategory):layerFeatures;if(layer)allLayer.addLayer(layer);}
+function renderClasses(){let search=id('search').value.toLocaleLowerCase('es-PE').trim();const list=id('classList');list.replaceChildren();for(const rec of resumen.clases_cobertura){if(search&&!rec.categoria.toLocaleLowerCase('es-PE').includes(search))continue;const b=document.createElement('button');b.type='button';b.className='classitem'+(selectCategory===rec.categoria?' active':'');b.setAttribute('aria-pressed',selectCategory===rec.categoria?'true':'false');b.innerHTML=`<span class="swatch" style="background:${colorFor(rec.categoria)}"></span><span class="classtxt"><b>${esc(rec.categoria)}</b><small>${rec.poligonos} polígonos</small></span><span class="area">${fmt(rec.area_km2)} km²<small>${fmt(rec.porcentaje_prov)} %</small></span>`;b.addEventListener('click',()=>{selectCategory=(selectCategory===rec.categoria?null:rec.categoria);applyCategory();renderClasses();updateStatus();if(window.innerWidth<=690)id('sidePanel').classList.add('closed')});list.appendChild(b)}}
+function updateStatus(){const item=resumen.clases_cobertura.find(x=>x.categoria===selectCategory);id('status').innerHTML=item?`<b>${esc(item.categoria)}</b><div>${fmt(item.area_km2)} km² · ${fmt(item.porcentaje_prov)} % de la provincia. ${item.poligonos} polígonos originales recortados.</div><div class="footer-tag">Cobertura histórica MINAM 2015 · no indica uso del suelo actual</div>`:`<b>Cobertura vegetal 2015</b><div>${resumen.clases} categorías representadas. ${nPhotos} registros fotográficos GPS de Satipo y alrededores (octubre de 2026).</div><div class="footer-tag">Fuente: MINAM / procesamiento SIG académico</div>`}
+id('reset').addEventListener('click',()=>{selectCategory=null;id('search').value='';applyCategory();renderClasses();updateStatus()});
+id('search').addEventListener('input',renderClasses);
+id('showCoverage').addEventListener('change',e=>{showCoverage=e.target.checked;applyCategory()});
+id('showPhotos').addEventListener('change',e=>e.target.checked?photoGroup.addTo(map):map.removeLayer(photoGroup));
+id('showBorder').addEventListener('change',e=>e.target.checked?border.addTo(map):map.removeLayer(border));
+id('panelButton').addEventListener('click',()=>{const panel=id('sidePanel');panel.classList.toggle('closed');setTimeout(()=>map.invalidateSize(),150)});
+if(window.innerWidth<=690)id('sidePanel').classList.add('closed');
+renderClasses();updateStatus();
+</script>
+</body></html>
