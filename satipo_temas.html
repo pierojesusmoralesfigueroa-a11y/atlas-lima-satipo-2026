@@ -8,6 +8,18 @@
 <style>
 :root{--ink:#29404a;--navy:#1c374b;--green:#2a725e;--line:#dfe8e4;--muted:#6b7d80;--bg:#f5f7f5}*{box-sizing:border-box}html,body{margin:0;height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:var(--bg)}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #51a990;outline-offset:2px}a{color:#257275}header{background:var(--navy);color:#fff;min-height:70px;padding:12px 21px;display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:3px solid #cca55b}.brand b{display:block;letter-spacing:.04em;font-size:15px}.brand small{display:block;color:#b7ced8;margin-top:4px;font-size:11px}.navlinks{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.navlinks a{color:#fff;text-decoration:none;border:1px solid #7e9ba6;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:700}.navlinks a:hover{background:#ffffff20}.layout{display:flex;height:calc(100dvh - 70px);min-height:480px}.side{width:370px;flex:0 0 370px;display:flex;flex-direction:column;background:#fff;border-right:1px solid var(--line);box-shadow:2px 0 15px #122a3510}.top{padding:20px 20px 16px;border-bottom:1px solid var(--line)}.eyebrow{font-weight:800;letter-spacing:1.4px;font-size:10px;color:#478878;text-transform:uppercase}.top h1{font-size:25px;line-height:1.18;margin:8px 0 7px;letter-spacing:-.5px}.top p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}.modes{padding:15px;display:grid;gap:8px;border-bottom:1px solid var(--line)}.mode{width:100%;text-align:left;background:#fbfdfb;border:1px solid #dde9e2;border-radius:9px;padding:11px 13px;color:#2d4e50}.mode b{display:block;font-size:13px}.mode small{display:block;font-size:10px;color:#738683;margin-top:4px;line-height:1.35}.mode.active{background:#e9f4ee;border-color:#4b9a78;box-shadow:inset 3px 0 #29805d}.legendbox{padding:13px 18px;overflow:auto;flex:1;min-height:0}.legendbox h2{font-size:13px;margin:0 0 10px}.leg-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f0f3f0;font-size:11px;line-height:1.4}.leg-item span.sw{height:16px;width:19px;border-radius:3px;border:1px solid #00000022;flex:0 0 19px}.leg-item b{font-weight:650;display:block}.leg-item small{color:#7a8787;font-size:10px}.foot{border-top:1px solid var(--line);padding:13px 18px;font-size:10px;color:#708181;line-height:1.52;background:#f9fbf9}.maparea{position:relative;flex:1;min-width:0}#map{width:100%;height:100%;background:#dfe8e2}.maplabel{position:absolute;z-index:500;top:14px;left:14px;max-width:325px;background:#fffffff2;border:1px solid #d4e2da;box-shadow:0 3px 16px #203a3730;padding:12px 14px;border-radius:9px;pointer-events:none}.maplabel strong{font-size:12px}.maplabel p{font-size:10px;color:#70827c;line-height:1.45;margin:5px 0 0}.alert{position:absolute;z-index:510;bottom:16px;left:14px;background:#fffffff3;border:1px solid #d5e3dd;box-shadow:0 2px 12px #112e3020;padding:10px 13px;border-radius:9px;max-width:410px;font-size:10px;line-height:1.5;color:#48645c}.controls{padding:10px 16px;display:flex;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line);font-size:11px}.controls label{display:flex;align-items:center;gap:6px}.controls input{accent-color:#3d9477}.leaflet-popup-content{font-size:12px;line-height:1.5}.leaflet-control-layers{font-size:11px}.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:#b6d6c1b0!important}.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#2c715a!important;color:#fff!important}
 @media(max-width:850px){.side{width:310px;flex-basis:310px}.navlinks a{font-size:10px}}@media(max-width:650px){header{padding:9px;min-height:66px}.brand b{font-size:12px}.brand small{font-size:9px}.navlinks{gap:4px}.navlinks a{padding:6px;font-size:10px}.layout{height:calc(100dvh - 66px);flex-direction:column}.side{width:100%;flex:none;max-height:46vh;border-right:0;border-bottom:1px solid var(--line);overflow:auto}.top{padding:10px 14px}.top h1{font-size:19px}.top p{font-size:10px}.modes{grid-template-columns:repeat(3,1fr);padding:7px;gap:5px}.mode{padding:7px}.mode b{font-size:10px}.mode small{font-size:9px}.legendbox{max-height:95px}.foot{display:none}.maparea{min-height:48vh}.maplabel{padding:7px;top:7px;left:7px;max-width:220px}.alert{bottom:8px;left:7px;right:7px;max-width:unset}}
+
+.use-legend-note{font-size:11px;line-height:1.5;color:#536b65;margin:0 0 9px}
+.use-legend-graphics{min-height:12px;max-width:100%;overflow-x:auto}
+.use-legend-graphic{display:block;max-width:100%;height:auto;background:white;border:1px solid #e2e8e4;border-radius:7px;padding:6px;margin-bottom:9px}
+.use-legend-grid{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+.use-symbol-row{display:flex;align-items:center;gap:9px;border-bottom:1px solid #edf2ef;padding:3px 0;font-size:11px;line-height:1.35}
+.use-symbol-row img{max-width:42px;max-height:28px;object-fit:contain;flex:none}
+.use-legend-catalog{border-top:1px solid #e2ebe5;padding-top:10px;margin-top:7px}
+.use-legend-catalog summary{font-size:11px;font-weight:750;color:#336c5e;cursor:pointer}
+.use-legend-catalog ol{padding-left:19px;margin:7px 0}.use-legend-catalog li{font-size:11px;line-height:1.4;padding:2px 0;color:#536b65}
+.use-legend-source{font-size:10px;display:inline-block;margin:10px 0;color:#217b72}
+@media(max-width:650px){.legendbox{max-height:180px;overflow-y:auto}}
 </style></head><body>
 <header><div class="brand"><b>◈ ATLAS INTERACTIVO · SATIPO</b><small>Pisos altitudinales · Clima 2020 · Uso del suelo 2020</small></div><nav class="navlinks"><a href="index.html">← Transecto</a><a href="satipo.html">Cobertura vegetal 2015</a></nav></header>
 <div class="layout"><aside class="side"><section class="top"><div class="eyebrow">Análisis territorial · UNMSM</div><h1>Los paisajes de Satipo</h1><p>Selecciona el mapa para explorar los contrastes de relieve, clima y uso del suelo. Se distinguen las fuentes, métodos y años de cada capa.</p></section>
@@ -44,6 +56,56 @@ uso.on('tileerror',()=>{failCount++;if(failCount>=3&&goodCount===0&&active==='us
 uso.on('tileload',()=>{goodCount++;if(active==='uso')byId('status').textContent='Uso/cambio de uso del suelo, GeoBosques 2020. Datos históricos mediante WMS externo. Clic en el mapa para orientarte con la fotografía satelital.'});
 const layers={pisos:floors,clima:climate,uso};let active='pisos';floors.addTo(map);
 function setLegend(items){const e=byId('legend');e.replaceChildren();for(const it of items){const div=document.createElement('div');div.className='leg-item';const span=document.createElement('span');span.className='sw';span.style.background=it.color||'#fff';const p=document.createElement('div');const b=document.createElement('b');b.textContent=it.name;const sm=document.createElement('small');sm.textContent=it.desc||'';p.append(b,sm);div.append(span,p);e.append(div)}}
+/* La simbología de uso de suelo se solicita al mismo servicio cartográfico
+   WMS/ArcGIS que dibuja el mapa. No se atribuyen colores inventados. */
+const USO_2020_CLASES=[
+ 'Bosques','Humedales en bosque','Agricultura','Vegetación secundaria',
+ 'Pastizales/Herbazales','Sabanas hidromórficas','Cuerpos de agua',
+ 'Humedales en no bosque','Áreas artificiales','Áreas mineras','Suelo desnudo'
+];
+const USO_LEGEND_WMS=WMS_URL+'?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=0&FORMAT=image%2Fpng';
+const USO_LEGEND_REST='https://gis.bosques.gob.pe/server/rest/services/Interoperabilidad/uso_cambio_uso_2020/MapServer/legend?f=json';
+function renderUsoLegend(){
+ const root=byId('legend');root.replaceChildren();
+ const note=document.createElement('p');note.className='use-legend-note';note.textContent='Obteniendo la simbología original del servicio GeoBosques…';root.appendChild(note);
+ const content=document.createElement('div');content.className='use-legend-graphics';root.appendChild(content);
+ const catalog=document.createElement('details');catalog.className='use-legend-catalog';
+ const heading=document.createElement('summary');heading.textContent='Ver las 11 subclases documentadas por GeoBosques';catalog.appendChild(heading);
+ const classes=document.createElement('ol');USO_2020_CLASES.forEach(name=>{const li=document.createElement('li');li.textContent=name;classes.appendChild(li)});catalog.appendChild(classes);root.appendChild(catalog);
+ const ref=document.createElement('a');ref.className='use-legend-source';ref.href='https://geobosques.minam.gob.pe/geobosque/view/servicios.php';ref.target='_blank';ref.rel='noopener noreferrer';ref.textContent='Consultar fuente y clasificación de GeoBosques';root.appendChild(ref);
+ const serverGraphic=document.createElement('img');serverGraphic.className='use-legend-graphic';serverGraphic.alt='Leyenda cromática del WMS GeoBosques, uso del suelo 2020';serverGraphic.loading='eager';serverGraphic.decoding='async';
+ content.appendChild(serverGraphic);
+ let finished=false;
+ function stillActive(){return root.contains(content);}
+ function restFallback(){
+  if(!stillActive()||finished)return;
+  note.textContent='Consultando la leyenda mediante el servicio cartográfico ArcGIS…';
+  fetch(USO_LEGEND_REST,{mode:'cors'}).then(r=>{if(!r.ok)throw new Error('Servicio no disponible');return r.json()}).then(data=>{
+   if(!stillActive()||finished)return;
+   const layers=Array.isArray(data.layers)?data.layers:[];
+   const layer=layers.find(x=>String(x.layerId)==='0')||layers.find(x=>Array.isArray(x.legend)&&x.legend.length);
+   const symbols=Array.isArray(layer?.legend)?layer.legend.filter(x=>typeof x.imageData==='string'&&x.imageData.length&&typeof x.label==='string'&&x.label.trim()):[];
+   if(!symbols.length)throw new Error('Sin símbolos');
+   const grid=document.createElement('div');grid.className='use-legend-grid';
+   symbols.forEach(item=>{
+    if(!/^[A-Za-z0-9+/=]+$/.test(item.imageData))return;
+    const row=document.createElement('div');row.className='use-symbol-row';
+    const img=document.createElement('img');const mime=['image/png','image/jpeg','image/gif'].includes(item.contentType)?item.contentType:'image/png';
+    img.src='data:'+mime+';base64,'+item.imageData;img.alt='';img.loading='lazy';
+    const label=document.createElement('span');label.textContent=item.label;row.append(img,label);grid.appendChild(row);
+   });
+   if(!grid.children.length)throw new Error('Sin imágenes compatibles');
+   content.replaceChildren(grid);note.textContent='Simbología obtenida del servicio oficial de GeoBosques (ArcGIS).';finished=true;
+  }).catch(()=>{
+   if(!stillActive()||finished)return;
+   note.textContent='No se pudo obtener la leyenda cromática del servidor. Se muestran las 11 clases oficiales sin asignar colores no verificados.';
+   catalog.open=true;content.replaceChildren();
+  });
+ }
+ serverGraphic.onload=()=>{if(!stillActive()||finished)return;if(serverGraphic.naturalWidth<10||serverGraphic.naturalHeight<10){serverGraphic.remove();restFallback();return;}note.textContent='Leyenda cromática proporcionada directamente por el servicio WMS GeoBosques.';finished=true;};
+ serverGraphic.onerror=()=>{if(!stillActive()||finished)return;serverGraphic.remove();restFallback();};
+ serverGraphic.src=USO_LEGEND_WMS;
+}
 function switchTo(theme){if(!layers[theme])return; if(layers[active])map.removeLayer(layers[active]);active=theme;layers[theme].addTo(map);if(map.hasLayer(border))border.bringToFront();if(map.hasLayer(road))road.bringToFront();
 for(const b of document.querySelectorAll('[data-theme]')){const on=b.dataset.theme===theme;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false')}
 if(theme==='pisos'){
@@ -60,9 +122,9 @@ if(theme==='pisos'){
  byId('status').textContent='Clima vectorial SENAMHI 2020: '+CLIMA_CODES.length+' códigos presentes en Satipo. '+missingClimateCodes+' códigos mantienen colores auxiliares de visualización.';
 }else{
  map.flyTo([-11.25,-74.64],11,{duration:.8});
- byId('legendTitle').textContent='Uso del suelo · WMS 2020';setLegend([{name:'Servicio GeoBosques',desc:'Leyenda original disponible en el servicio cartográfico; colores proporcionados por el servidor.',color:'#b6d0af'},{name:'Uso y cambio de uso',desc:'No equivale a la cobertura vegetal MINAM 2015.',color:'#dfc59f'}]);
+ byId('legendTitle').textContent='Uso de la tierra · GeoBosques 2020';renderUsoLegend();
  byId('mapTitle').textContent='Uso del suelo · GeoBosques 2020';byId('mapDescription').textContent='Capa externa del proyecto QGIS original; depende de un servicio WMS remoto.';
- byId('sourceFoot').innerHTML='<b>Fuente:</b> Servicio WMS GeoBosques "uso_cambio_uso_2020", capa 0; la fecha corresponde a la temática. <a target="_blank" rel="noopener" href="https://geobosques.minam.gob.pe/geobosque/view/servicios.php">Consultar catálogo oficial</a>. Si no aparece información el servidor podría no responder.';
+ byId('sourceFoot').innerHTML='<b>Fuente:</b> GeoBosques (MINAM), mapa de uso de la tierra 2020. El servicio WMS/ArcGIS aporta la simbología y el catálogo oficial documenta 11 subclases. No equivale a la cobertura vegetal MINAM 2015. <a target="_blank" rel="noopener" href="https://geobosques.minam.gob.pe/geobosque/view/servicios.php">Fuente oficial</a>.';
  byId('status').textContent='Solicitando imágenes WMS al servicio remoto GeoBosques. La visualización depende de la conexión del servidor.';
 }
 }
