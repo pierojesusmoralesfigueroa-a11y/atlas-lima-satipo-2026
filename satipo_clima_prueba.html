@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Visor de prueba de clasificación climática SENAMHI en la provincia de Satipo, integrado al Atlas Lima–Satipo 2026.">
-<title>Satipo · Clima 1981–2010 | Atlas Lima–Satipo 2026</title>
+<title>Satipo · Clasificación climática vectorial | Atlas Lima–Satipo 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
 :root{--ink:#203c4d;--navy:#173c4d;--green:#2b735f;--sub:#647985;--line:#d9e3e5;--bg:#f4f7f8}
@@ -24,7 +24,7 @@ hr{border:0;border-top:1px solid var(--line);margin:20px 0}
 .status{font-size:12px;padding:10px 12px;border-radius:8px;background:#e6f0ef;border:1px solid #c9dfda;color:#24574d;line-height:1.5}
 .note{font-size:12px;background:#fff8e9;border:1px solid #ecdcb7;border-radius:8px;padding:11px;color:#6d5d39;line-height:1.55}
 .legend{border:1px solid var(--line);border-radius:8px;background:white;padding:12px;margin-top:11px}
-.legend strong{display:block;margin-bottom:8px;font-size:12px}.legend img{display:block;max-width:100%;height:auto;margin:auto}
+.legend strong{display:block;margin-bottom:8px;font-size:12px}.legend-row{display:flex;gap:9px;align-items:flex-start;border-bottom:1px solid #e7edee;padding:7px 0;font-size:11px;line-height:1.35}.legend-row .swatch{width:17px;height:17px;flex:0 0 17px;border-radius:3px;border:1px solid #8c9e9e}.legend-row small{display:block;color:#70858a;margin-top:2px}.legend-row:last-child{border-bottom:0}
 a{color:#236c71}.source{font-size:11px;color:#637882;line-height:1.5;margin-top:17px}
 .main{flex:1;min-width:0;position:relative}.map{width:100%;height:100%;min-height:430px;background:#dce8e8}
 .banner{position:absolute;z-index:450;top:16px;left:16px;padding:12px 14px;border:1px solid var(--line);border-radius:9px;background:#fffffff0;box-shadow:0 3px 15px #16324a18;pointer-events:none;font-size:12px}
@@ -35,53 +35,64 @@ a{color:#236c71}.source{font-size:11px;color:#637882;line-height:1.5;margin-top:
 </head>
 <body>
 <header>
- <div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>ATLAS INTERACTIVO · SATIPO</strong><small>Módulo experimental · Climas 1981–2010 · SENAMHI</small></div></div>
+ <div class="brand"><span class="mark" aria-hidden="true">◈</span><div><strong>ATLAS INTERACTIVO · SATIPO</strong><small>Módulo experimental · Clima SENAMHI · MAPA_03</small></div></div>
  <a class="back" href="satipo.html">← Cobertura vegetal 2015</a>
 </header>
 <div class="shell">
 <aside class="panel">
  <div class="eyebrow">Análisis territorial · Satipo</div>
  <h1>Clasificación climática</h1>
- <p>Visualización de la <strong>clasificación climática del SENAMHI actualizada en 2020–2021</strong>, con periodo de referencia <strong>1981–2010</strong>. Se usa la capa WMS identificada por el catálogo oficial de geoservicios del SENAMHI, sin modificar la cobertura vegetal histórica del atlas.</p>
- <div id="status" class="status" role="status" aria-live="polite">Conectando con la capa WMS de clasificación climática 1981–2010…</div>
- <div class="control"><label><input type="checkbox" id="clima" checked> <strong>Clima 1981–2010 · SENAMHI</strong></label><small>Clasificación nacional en vista centrada en Satipo. El WMS también muestra territorios vecinos; esta página todavía no recorta sus imágenes al límite provincial.</small><label for="opacity" style="display:block;margin-top:14px">Opacidad de la capa: <output id="opacityValue">80 %</output></label><input class="range" type="range" min="20" max="100" step="5" value="80" id="opacity"></div>
+ <p>Visualización de la <strong>clasificación climática Thornthwaite–SENAMHI (2020)</strong> contenida en el proyecto QGIS <strong>MAPA_03/SATIPOMAPS</strong>. Se emplean polígonos vectoriales recortados a Satipo, evitando los errores de representación del servicio WMS. No reemplaza la cobertura vegetal histórica.</p>
+ <div id="status" class="status" role="status" aria-live="polite">Cargando los polígonos climáticos locales del proyecto QGIS…</div>
+ <div class="control"><label><input type="checkbox" id="clima" checked> <strong>Clima SENAMHI 2020 (vector)</strong></label><small>14 códigos climáticos presentes dentro de Satipo. Los polígonos ya están recortados al límite provincial.</small><label for="opacity" style="display:block;margin-top:14px">Opacidad de la capa: <output id="opacityValue">80 %</output></label><input class="range" type="range" min="20" max="100" step="5" value="80" id="opacity"></div>
  <div class="control"><label><input type="checkbox" id="limite" checked> Límite provincial de referencia</label><br><label><input type="checkbox" id="fotos"> Fotografías GPS (octubre de 2026)</label><small>Las fotografías documentan la salida de campo, no sirven para validar por sí solas la clasificación climática.</small></div>
- <div class="legend"><strong>Leyenda oficial del servicio</strong><img id="legendImage" alt="Leyenda de clasificación climática SENAMHI" loading="lazy"><small id="legendFallback" style="display:none">El servicio no proporciona una leyenda accesible en este momento.</small></div>
+ <div class="legend"><strong>Clases climáticas de Satipo</strong><div id="climateLegend"></div><small>Los colores identificados como «QGIS» proceden de la simbología del proyecto. Las categorías sin leyenda original usan colores auxiliares y requieren validación de su denominación.</small></div>
  <hr>
- <div class="note"><strong>Alcance:</strong> vista experimental. La clasificación corresponde al periodo de referencia 1981–2010 y no representa el tiempo actual ni los cambios posteriores. La capa WMS es nacional y no está recortada al límite provincial; la línea punteada señala el ámbito de Satipo. El límite del atlas necesita comprobarse con la cartografía administrativa vigente. El servicio remoto puede presentar interrupciones.</div>
- <p class="source"><strong>Fuentes:</strong> SENAMHI / IDESEP, capa de Clasificación Climática 1981–2010 registrada en su catálogo WFS; consulta del WMS del servicio g_05_01. Límites: referencia INEI ya incluida en el atlas.<br>
- <a href="https://idesep.senamhi.gob.pe/portalidesep/idesep_componente_catalogo_geoservicios_wfs.jsp" target="_blank" rel="noopener noreferrer">Catálogo oficial WFS SENAMHI</a> · <a href="https://idesep.senamhi.gob.pe/portalidesep/wms.do" target="_blank" rel="noopener noreferrer">Directorio IDESEP</a> · <a href="index.html">Atlas general</a></p>
+ <div class="note"><strong>Alcance:</strong> vista experimental elaborada con la capa vectorial de MAPA_03; los límites provinciales proceden del archivo del proyecto y deben verificarse administrativamente. Siete códigos representados en Satipo cuentan con descripciones explícitas en la leyenda QGIS, y siete más están pendientes de completar su denominación y simbología definitiva. Los datos climáticos no describen el tiempo meteorológico actual.</div>
+ <p class="source"><strong>Fuentes:</strong> SENAMHI (2020), capa vectorial del proyecto SATIPOMAPS.qgz; geometría simplificada para web. Límite: referencia INEI del atlas. Los colores auxiliares no representan una leyenda oficial.<br>
+ <a href="https://www.senamhi.gob.pe/servicios/?p=mapa-climatico-del-peru" target="_blank" rel="noopener noreferrer">Documentación climática SENAMHI</a> · <a href="https://idesep.senamhi.gob.pe/portalidesep/wms.do" target="_blank" rel="noopener noreferrer">Directorio IDESEP</a> · <a href="index.html">Atlas general</a></p>
 </aside>
 <main class="main">
  <div id="map" class="map" role="region" aria-label="Mapa interactivo con clasificación climática de Satipo"></div>
- <div class="banner"><strong>Satipo · Junín, Perú</strong><span>Clasificación climática 1981–2010 · SENAMHI</span></div>
+ <div class="banner"><strong>Satipo · Junín, Perú</strong><span>Clima SENAMHI · polígonos de Satipo</span></div>
 </main>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="satipo_limite.js"></script>
+<script src="clima_satipo.js"></script>
+<script src="clima_leyenda_qgis.js"></script>
 <script src="datos.js"></script>
 <script>
 (function(){
 'use strict';
 var status = document.getElementById('status');
-if(!window.L || !window.LIMITE_SATIPO){status.textContent='No se pudieron cargar Leaflet o el límite provincial del atlas.';return;}
+if(!window.L || !window.LIMITE_SATIPO || !window.CLIMA_SATIPO){status.textContent='No se cargó Leaflet, el límite provincial o el archivo vectorial de clima.';return;}
 var map=L.map('map',{zoomSnap:.25,preferCanvas:true}).setView([-11.22,-74.83],9);
 var streets=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
 var satellite=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Imágenes © Esri y proveedores'});
 L.control.layers({'Calles · OSM':streets,'Satélite · Esri':satellite},null,{position:'topright'}).addTo(map);
 var border=L.geoJSON(window.LIMITE_SATIPO,{style:{color:'#183e38',weight:2.6,fillOpacity:0,dashArray:'7,4'},interactive:false}).addTo(map);
 if(border.getBounds().isValid())map.fitBounds(border.getBounds().pad(.06));
-var base='https://idesep.senamhi.gob.pe:443/geoserver/g_05_01/wms';
-var name='g_05_01:05_01_001_03_001_512_2021_00_00';
-var climate=L.tileLayer.wms(base,{layers:name,format:'image/png',transparent:true,version:'1.1.1',opacity:.8,attribution:'Clasificación climática © SENAMHI / IDESEP'});
-var successes=0, failures=0;
-climate.on('tileload',function(){successes++;if(successes===1){status.textContent='El servidor respondió con imágenes de la clasificación climática 1981–2010. Comprueba visualmente los colores; la versión WMS se encuentra en evaluación.';}});
-climate.on('tileerror',function(){failures++;if(failures>=4&&successes===0){status.textContent='El servicio WMS no está respondiendo. La base cartográfica y el límite provincial siguen disponibles; puedes reintentar más tarde.';status.style.background='#fff0e5';}});
+
+var codes=Array.from(new Set(window.CLIMA_SATIPO.features.map(function(f){return f.properties.codigo;}))).filter(Boolean).sort(function(a,b){return a.localeCompare(b,'es');});
+var qgis=window.CLIMA_LEYENDA_QGIS||{};
+var fallback=['#b97b82','#a088bc','#7297a0','#d3a365','#a5b773','#7794b8','#c99cba','#8fbea6'];
+var missing=codes.filter(function(c){return !qgis[c]});
+var auxColors={}; missing.forEach(function(c,i){auxColors[c]=fallback[i%fallback.length];});
+function getColor(c){return qgis[c]&&qgis[c].color?qgis[c].color:auxColors[c]||'#8d9fa5';}
+var climate=L.geoJSON(window.CLIMA_SATIPO,{
+ renderer:L.canvas({padding:.2}),
+ style:function(f){return {color:'#304e56',weight:.45,opacity:.8,fillColor:getColor(f.properties.codigo),fillOpacity:.8};},
+ onEachFeature:function(f,layer){var code=f.properties.codigo;var item=qgis[code];var desc=item&&item.nombre?item.nombre:'Descripción no incluida en la simbología recuperada de QGIS';layer.bindPopup('<strong>Código: '+String(code).replace(/</g,'&lt;')+'</strong><br>'+desc+'<br><small>SENAMHI 2020 · cartografía vectorial de MAPA_03; '+(item?'simbología QGIS':'color auxiliar de visualización')+'.</small>')}
+});
 climate.addTo(map);border.bringToFront();
+status.textContent='Capa vectorial cargada: '+codes.length+' códigos climáticos, '+window.CLIMA_SATIPO.features.length+' geometrías generales de clase. '+missing.length+' clases usan colores auxiliares, identificados en la leyenda.';
+var legendEl=document.getElementById('climateLegend');
+codes.forEach(function(c){var rec=qgis[c];var row=document.createElement('div');row.className='legend-row';var sw=document.createElement('span');sw.className='swatch';sw.style.backgroundColor=getColor(c);var body=document.createElement('div');var name=document.createElement('strong');name.textContent=c;var desc=document.createElement('small');desc.textContent=(rec&&rec.nombre?rec.nombre:'Denominación pendiente de verificar')+' · '+(rec?'QGIS':'color auxiliar');body.appendChild(name);body.appendChild(desc);row.appendChild(sw);row.appendChild(body);legendEl.appendChild(row)});
 document.getElementById('clima').addEventListener('change',function(e){if(e.target.checked){climate.addTo(map);border.bringToFront();}else map.removeLayer(climate);});
 document.getElementById('limite').addEventListener('change',function(e){if(e.target.checked){border.addTo(map);border.bringToFront();}else map.removeLayer(border);});
 var slider=document.getElementById('opacity'),output=document.getElementById('opacityValue');output.textContent=slider.value+' %';
-slider.addEventListener('input',function(){climate.setOpacity(Number(slider.value)/100);output.textContent=slider.value+' %';});
+slider.addEventListener('input',function(){climate.setStyle({fillOpacity:Number(slider.value)/100});output.textContent=slider.value+' %';});
 var group=L.layerGroup();(window.FOTOS||[]).forEach(function(f){
  if(!String(f.sector||'').includes('Satipo')||!Number.isFinite(+f.lat)||!Number.isFinite(+f.lon))return;
  var m=L.marker([+f.lat,+f.lon],{title:'Fotografía '+f.id});
@@ -90,9 +101,6 @@ var group=L.layerGroup();(window.FOTOS||[]).forEach(function(f){
  m.bindPopup('<div class="photo-pop"><img src="'+image+'" alt="Fotografía de Satipo"><strong>Registro GPS '+String(f.id).replace(/</g,'&lt;')+'</strong><p>Octubre de 2026</p><a target="_blank" rel="noopener" href="'+original+'">Ver fotografía original</a></div>');group.addLayer(m);
 });
 document.getElementById('fotos').addEventListener('change',function(e){if(e.target.checked)group.addTo(map);else map.removeLayer(group);});
-var legend=document.getElementById('legendImage');
-legend.src=base+'?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&LAYER='+encodeURIComponent(name);
-legend.addEventListener('error',function(){legend.style.display='none';document.getElementById('legendFallback').style.display='block';});
 })();
 </script>
 </body>
